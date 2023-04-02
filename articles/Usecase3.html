@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,12 +44,13 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters and of buffer zones</a>
+    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 2: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 3: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
     <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Preparation of datasets for `CRTspat`</a>
+    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
       </ul>
@@ -112,8 +113,11 @@ in the chosen geography, assuming baseline data are available.</p>
 <span><span class="co">## ----------------------</span></span>
 <span><span class="co">##         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span></span>
 <span><span class="co">##       x -6.29    -2.58    -0.19    -0.06     2.80     5.43   </span></span>
-<span><span class="co">##       y -3.08    -1.17    -0.43    -0.07     1.10     4.77   </span></span>
-<span><span class="co">## Total area (within  0.2 km of a location) :  27.6 sq.km</span></span>
+<span><span class="co">##       y -3.72    -1.41    -0.52    -0.08     1.33     5.76   </span></span>
+<span><span class="co">## Total area (within  0.2 km of a location) :  31.2 sq.km</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Geolocation of centroid (radians):</span></span>
+<span><span class="co">##           latitude:  -0.406 longitude:  34.2 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Locations and Clusters</span></span>
 <span><span class="co">## ----------------------                                          -            </span></span>
@@ -161,6 +165,7 @@ outcomes.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0.08</span>, <span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">600</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: Removed 13 rows containing non-finite values (`stat_smooth()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning in stats::qt(level/2 + 0.5, pred$df): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning -Inf</span></span></code></pre>
 <p>
 <img src="example3b.r-1.png"><br><em>Fig 3.1 Intracluster correlation

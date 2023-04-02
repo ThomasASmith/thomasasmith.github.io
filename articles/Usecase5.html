@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,12 +44,13 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters and of buffer zones</a>
+    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 2: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 3: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
     <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Preparation of datasets for `CRTspat`</a>
+    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
       </ul>
@@ -112,16 +113,18 @@ analysis requires a prediction mesh. Generation of this mesh using <a href="../r
 can be computationally expensive, so it is recommended to compute the
 mesh just once for each dataset.</li>
 </ul>
-<p><code>CRTanalysis</code> is design to facilitate simulations of
+<p><code>CRTspat</code> is designed to facilitate simulation studies of
 different analytical methods for spatial CRTs by automating the data
-processing and selecting appropriate analysis options. It does not
+processing and selecting some appropriate analysis options. It does not
 replace conventional use of these packages. The <code>CRTanalysis</code>
 object that is returned includes the usual object output by the
-statistical analysis package, which can be accessed by the usual methods
-(e.g <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>,
+statistical analysis package, which forms
+<code>CRTanalysis$model_object</code> object. This can be accessed by
+the usual methods (e.g <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>,
 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>). Real field trials very often entail complications
-that are not catered for any of the analysis options in by the likely
-to</p>
+that are not catered for any of the analysis options in
+<code>CRTanalysis</code> and <code>CRTspat</code> does not aspire to
+carry out the full analytical workflow for a trial.</p>
 <table class="table">
 <colgroup>
 <col width="40%">
@@ -174,32 +177,11 @@ exp(-\beta_1)}\)</span>. <span class="math inline">\(\hat{p}_{I} =
 <p>To create a 100m INLA mesh for <code>&lt;MyTrial&gt;</code>, use:</p>
 <p><code>mesh &lt;- new_mesh(trial = &lt;MyTrial&gt; , pixel = 0.1)</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.csv'</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span></span>
+<span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, cfunc<span class="op">=</span><span class="st">'P'</span>,</span>
 <span>  spatialEffects<span class="op">=</span> <span class="cn">TRUE</span>, requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">'examplemesh100.txt'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Estimating scale parameter for contamination range 
-## 
-DIC:  1361  Contamination scale parameter:  -2.361   
-
-DIC:  1362  Contamination scale parameter:  2.361   
-
-DIC:  1362  Contamination scale parameter:  -5.279   
-
-DIC:  1362  Contamination scale parameter:  -2.282   
-
-DIC:  1362  Contamination scale parameter:  -3.789   
-
-DIC:  1362  Contamination scale parameter:  -2.906   
-
-DIC:  1362  Contamination scale parameter:  -2.569   
-
-DIC:  1362  Contamination scale parameter:  -2.44   
-
-DIC:  1362  Contamination scale parameter:  -2.394   
-
-DIC:  1362  Contamination scale parameter:  -2.327   
-
-DIC:  1361  Contamination scale parameter:  -2.361   </code></pre>
+<pre><code><span><span class="co">## Estimating scale parameter for contamination range</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map<span class="op">=</span><span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span><span class="op">)</span></span></code></pre></div>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,12 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters and of buffer zones</a>
+    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 2: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 3: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
     <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Preparation of datasets for `CRTspat`</a>
+    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -185,16 +186,43 @@ Contamination is simulated as arising from a diffusion-like process.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">example_simulated_CRT</span> <span class="op">=</span>  <span class="fu">simulateCRT</span><span class="op">(</span>trial<span class="op">=</span><span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.csv'</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                                     effect<span class="op">=</span><span class="fl">0.25</span>,</span></span>
-<span class="r-in"><span>                                     ICC_inp<span class="op">=</span><span class="fl">0.05</span>,</span></span>
-<span class="r-in"><span>                                     outcome0<span class="op">=</span><span class="fl">0.5</span>,</span></span>
-<span class="r-in"><span>                                     matchedPair <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                                     scale<span class="op">=</span><span class="st">'proportion'</span>,</span></span>
-<span class="r-in"><span>                                     sd<span class="op">=</span><span class="fl">0.6</span>,</span></span>
-<span class="r-in"><span>                                     tol<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span><span class="va">exampleCRT</span> <span class="op">&lt;-</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu">simulateCRT</span><span class="op">(</span><span class="va">exampleCRT</span>,</span></span>
+<span class="r-in"><span>  effect <span class="op">=</span> <span class="fl">0.25</span>,</span></span>
+<span class="r-in"><span>  ICC_inp <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
+<span class="r-in"><span>  outcome0 <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  matchedPair <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  scale <span class="op">=</span> <span class="st">'proportion'</span>,</span></span>
+<span class="r-in"><span>  sd <span class="op">=</span> <span class="fl">0.6</span>,</span></span>
+<span class="r-in"><span>  tol <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">simulation</span><span class="op">)</span> <span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ===============================CLUSTER RANDOMISED TRIAL ===========================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       y -5.08    -2.84     0.19     0.05     2.49     6.16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  27.6 sq.km</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geolocation of centroid (radians):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           latitude:  -0.43 longitude:  34.2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      1181            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           24            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             49.2            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             3.9            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> S.D. of distance to nearest discordant location (km):           1.05          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Other variables in dataset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          RDT_test_result  base_denom  propensity  denom  base_num  num            </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

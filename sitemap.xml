@@ -25,7 +25,10 @@
     <loc>/articles/Usecase5.html</loc>
   </url>
   <url>
-    <loc>/articles/Usecase7.html</loc>
+    <loc>/articles/Usecase6.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Usecase9.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -43,7 +46,7 @@
     <loc>/reference/aggregateCRT.html</loc>
   </url>
   <url>
-    <loc>/reference/anonymize.site.html</loc>
+    <loc>/reference/anonymize_site.html</loc>
   </url>
   <url>
     <loc>/reference/CRTanalysis.html</loc>
@@ -58,6 +61,9 @@
     <loc>/reference/CRTspat-package.html</loc>
   </url>
   <url>
+    <loc>/reference/CRTwrite.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -65,12 +71,6 @@
   </url>
   <url>
     <loc>/reference/new_mesh.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.CRTanalysis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.CRTsp.html</loc>
   </url>
   <url>
     <loc>/reference/plotCRT.html</loc>
