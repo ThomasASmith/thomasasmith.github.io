@@ -50,6 +50,8 @@
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
     <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 8: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
@@ -151,100 +153,15 @@ approximation to the effect of mosquito movement. The degree of
 spillover is specified either as a contamination range with the
 <code>theta_inp</code> parameter, or as <code>sd</code>, the bandwidth
 of the corresponding normal kernel. If both are provided then it is the
-value of <code>theta_inp</code> that is used.</p>
+value of <code>theta_inp</code> that is used. The effect is modelled by
+applying an <a href="Usecase5.html">inverse probit (error function)
+transformation</a> to the <code>propensity</code>: <span class="math inline">\(P\left( d \right) = \frac{1}{2}\left( 1\  + \
+erf\left( \frac{\text{d/σ}}{\sqrt{2}} \right) \right)\)</span>, where σ
+is the value of <code>sd</code> and <span class="math inline">\(d\)</span> is the distance to the boundary between
+the arms.</p>
 <div class="section level4">
 <h4 id="example-with-baseline-data-provided-as-proportions">Example with baseline data provided as proportions<a class="anchor" aria-label="anchor" href="#example-with-baseline-data-provided-as-proportions"></a>
 </h4>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CRTspat</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
-<span><span class="va">example_locations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">'example_site.csv'</span><span class="op">)</span></span>
-<span><span class="va">example_locations</span><span class="op">$</span><span class="va">base_denom</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">example_randomized</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTsp.html">CRTsp</a></span><span class="op">(</span><span class="va">example_locations</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/aggregateCRT.html">aggregateCRT</a></span><span class="op">(</span>auxiliaries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RDT_test_result"</span>, <span class="st">"base_denom"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/specify_clusters.html">specify_clusters</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">50</span>, algorithm <span class="op">=</span> <span class="st">'NN'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/randomizeCRT.html">randomizeCRT</a></span><span class="op">(</span>matchedPair <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example_randomized</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ===============================CLUSTER RANDOMISED TRIAL ===========================</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Summary of coordinates</span></span>
-<span><span class="co">## ----------------------</span></span>
-<span><span class="co">##         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span></span>
-<span><span class="co">##       x -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span></span>
-<span><span class="co">##       y -5.08    -2.84     0.19     0.05     2.49     6.16   </span></span>
-<span><span class="co">## Total area (within  0.2 km of a location) :  27.6 sq.km</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Locations and Clusters</span></span>
-<span><span class="co">## ----------------------                                          -            </span></span>
-<span><span class="co">## Coordinate system                      (x, y)            </span></span>
-<span><span class="co">## Locations:                                                      1181            </span></span>
-<span><span class="co">## Available clusters (across both arms)                           24            </span></span>
-<span><span class="co">##   Per cluster mean number of points                             49.2            </span></span>
-<span><span class="co">##   Per cluster s.d. number of points                             3.9            </span></span>
-<span><span class="co">## S.D. of distance to nearest discordant location (km):           1.05          </span></span>
-<span><span class="co">## Cluster randomization:                      Independently randomized            </span></span>
-<span><span class="co">## No power calculations to report          -            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Other variables in dataset</span></span>
-<span><span class="co">## --------------------------          RDT_test_result  base_denom</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>, map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">example2a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulateCRT.html">simulateCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>,</span>
-<span>       effect <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>       outcome0 <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>       generateBaseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>       baselineNumerator <span class="op">=</span> <span class="st">"RDT_test_result"</span>,</span>
-<span>       baselineDenominator <span class="op">=</span> <span class="st">"base_denom"</span>,</span>
-<span>       ICC_inp <span class="op">=</span> <span class="cn">NULL</span>, theta_inp <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example2a</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ===============================CLUSTER RANDOMISED TRIAL ===========================</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Summary of coordinates</span></span>
-<span><span class="co">## ----------------------</span></span>
-<span><span class="co">##         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span></span>
-<span><span class="co">##       x -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span></span>
-<span><span class="co">##       y -5.08    -2.84     0.19     0.05     2.49     6.16   </span></span>
-<span><span class="co">## Total area (within  0.2 km of a location) :  27.6 sq.km</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Locations and Clusters</span></span>
-<span><span class="co">## ----------------------                                          -            </span></span>
-<span><span class="co">## Coordinate system                      (x, y)            </span></span>
-<span><span class="co">## Locations:                                                      1181            </span></span>
-<span><span class="co">## Available clusters (across both arms)                           24            </span></span>
-<span><span class="co">##   Per cluster mean number of points                             49.2            </span></span>
-<span><span class="co">##   Per cluster s.d. number of points                             3.9            </span></span>
-<span><span class="co">## S.D. of distance to nearest discordant location (km):           1.05          </span></span>
-<span><span class="co">## Cluster randomization:                      Independently randomized            </span></span>
-<span><span class="co">## No power calculations to report          -            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Other variables in dataset</span></span>
-<span><span class="co">## --------------------------          RDT_test_result  base_denom  propensity  denom  num</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span></span>
-<span><span class="va">examplemesh100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">"examplemesh100.txt"</span><span class="op">)</span></span>
-<span><span class="va">example2aanalysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example2a</span>, method <span class="op">=</span> <span class="st">'T'</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example2aanalysis</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
-<span><span class="co">## Analysis method:  T </span></span>
-<span><span class="co">## Link function:  logit </span></span>
-<span><span class="co">## Model formula:  arm + (1 | cluster) </span></span>
-<span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:     Control:  0.364  (95% CL:  0.286 0.451 )</span></span>
-<span><span class="co">##           Intervention:  0.21  (95% CL:  0.147 0.292 )</span></span>
-<span><span class="co">##              Efficacy:   0.423  (95% CL:  0.208 0.727 )</span></span>
-<span><span class="co">## Percentage of population in contamination zone:  0 %</span></span>
-<span><span class="co">## P-value (2-sided):  0.006879064</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example2aINLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example2a</span>,</span>
-<span>                                 method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, cfunc <span class="op">=</span> <span class="st">'X'</span>,</span>
-<span>                                 clusterEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                                 requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="va">examplemesh100</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aINLA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aINLA</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span>, showClusterBoundaries <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example2a.r-1.png"><br><em>Fig 2.1 Map of simulated outcome
 at cluster level</em>
@@ -257,14 +174,13 @@ distance from boundary</em>
 <div class="section level4">
 <h4 id="example-with-infectiousness-proxy-surface-generated-externally">Example with infectiousness proxy surface generated externally<a class="anchor" aria-label="anchor" href="#example-with-infectiousness-proxy-surface-generated-externally"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
 <span><span class="co"># Simulate a site with 2000 locations</span></span>
 <span><span class="va">new_site</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTsp.html">CRTsp</a></span><span class="op">(</span>geoscale <span class="op">=</span> <span class="fl">2</span>, locations<span class="op">=</span><span class="fl">2000</span>, kappa<span class="op">=</span><span class="fl">3</span>, mu<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span>
 <span><span class="co"># propensity surface generated as an arbitrary linear function of x the co-ordinate</span></span>
 <span><span class="va">new_site</span><span class="op">$</span><span class="va">propensity</span> <span class="op">&lt;-</span> <span class="fl">0.5</span><span class="op">*</span><span class="va">new_site</span><span class="op">$</span><span class="va">trial</span><span class="op">$</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">new_site</span><span class="op">$</span><span class="va">trial</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html" class="external-link">capture.output</a></span><span class="op">(</span></span>
 <span><span class="va">example2b</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTsp.html">CRTsp</a></span><span class="op">(</span><span class="va">new_site</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/specify_clusters.html">specify_clusters</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">40</span>, algorithm <span class="op">=</span> <span class="st">'NN'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/randomizeCRT.html">randomizeCRT</a></span><span class="op">(</span>matchedPair <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -273,9 +189,13 @@ distance from boundary</em>
 <span>                          outcome0 <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>                          generateBaseline <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                          ICC_inp <span class="op">=</span> <span class="fl">0.05</span>,</span>
-<span>                          theta_inp <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example2b</span><span class="op">)</span></span></code></pre></div>
+<span>                          theta_inp <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span></span>
+<span><span class="co">## Estimating the smoothing required to achieve the target ICC of 0.05 </span></span>
+<span><span class="co">## </span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example2b</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ===============================CLUSTER RANDOMISED TRIAL ===========================</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Summary of coordinates</span></span>
@@ -297,8 +217,8 @@ distance from boundary</em>
 <span><span class="co">## No power calculations to report          -            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Other variables in dataset</span></span>
-<span><span class="co">## --------------------------          propensity  base_denom  base_num  denom  num</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<span><span class="co">## --------------------------          denom  propensity  num  base_denom  base_num</span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results2b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example2b</span>, method <span class="op">=</span> <span class="st">'GEE'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">results2b</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
@@ -306,12 +226,12 @@ distance from boundary</em>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm </span></span>
 <span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:     Control:  0.372  (95% CL:  0.319 0.428 )</span></span>
-<span><span class="co">##           Intervention:  0.228  (95% CL:  0.192 0.269 )</span></span>
-<span><span class="co">##              Efficacy:   0.387  (95% CL:  0.233 0.511 )</span></span>
-<span><span class="co">## Percentage of population in contamination zone:  0 %</span></span>
-<span><span class="co">## Intracluster correlation (ICC):  0.0454  (95% CL:  0.0202 0.0706 )</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<span><span class="co">## Estimates:      Control:  0.475  (95% CL:  0.407 0.544 )</span></span>
+<span><span class="co">##            Intervention:  0.125  (95% CL:  0.103 0.151 )</span></span>
+<span><span class="co">##                Efficacy:  0.737  (95% CL:  0.663 0.793 )</span></span>
+<span><span class="co">## Intracluster correlation (ICC) :  0.0562  (95% CL:  0.0261 0.0862 )</span></span>
+<span><span class="co">## </span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2b</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'clusters'</span>, showClusterLabels <span class="op">=</span> <span class="cn">TRUE</span>, maskbuffer <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example2b.r-1.png"><br><em>Fig 2.3 Map of clusters in
@@ -322,10 +242,9 @@ simulated trial</em>
 <h4 id="example-with-baseline-generated-from-user-provided-values-of-the-overall-initial-prevalence-and-icc">Example with baseline generated from user-provided values of the
 overall initial prevalence and ICC<a class="anchor" aria-label="anchor" href="#example-with-baseline-generated-from-user-provided-values-of-the-overall-initial-prevalence-and-icc"></a>
 </h4>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
 <span><span class="co"># use co-ordinates, cluster and arm assignments, and baseline data from `example_simulated`</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html" class="external-link">capture.output</a></span><span class="op">(</span></span>
 <span><span class="va">example2c</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTsp.html">CRTsp</a></span><span class="op">(</span>geoscale <span class="op">=</span> <span class="fl">2</span>, locations<span class="op">=</span><span class="fl">2000</span>, kappa<span class="op">=</span><span class="fl">3</span>, mu<span class="op">=</span><span class="fl">40</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/specify_clusters.html">specify_clusters</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">40</span>, algorithm <span class="op">=</span> <span class="st">'NN'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/randomizeCRT.html">randomizeCRT</a></span><span class="op">(</span>matchedPair <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -336,20 +255,24 @@ overall initial prevalence and ICC<a class="anchor" aria-label="anchor" href="#e
 <span>       baselineNumerator <span class="op">=</span> <span class="st">'base_num'</span>,</span>
 <span>       baselineDenominator <span class="op">=</span> <span class="st">'base_denom'</span>,</span>
 <span>       ICC_inp <span class="op">=</span> <span class="fl">0.08</span>,</span>
-<span>       theta_inp <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">results2c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example2c</span>, method <span class="op">=</span> <span class="st">'GEE'</span><span class="op">)</span></span>
+<span>       theta_inp <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span></span>
+<span><span class="co">## Estimating the smoothing required to achieve the target ICC of 0.08 </span></span>
+<span><span class="co">## </span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results2c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example2c</span>, method <span class="op">=</span> <span class="st">'GEE'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">results2c</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  GEE </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm </span></span>
 <span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:     Control:  0.317  (95% CL:  0.26 0.381 )</span></span>
-<span><span class="co">##           Intervention:  0.283  (95% CL:  0.23 0.343 )</span></span>
-<span><span class="co">##              Efficacy:   0.107  (95% CL:  -0.184 0.317 )</span></span>
-<span><span class="co">## Percentage of population in contamination zone:  0 %</span></span>
-<span><span class="co">## Intracluster correlation (ICC):  0.0834  (95% CL:  0.0503 0.117 )</span></span></code></pre>
+<span><span class="co">## Estimates:      Control:  0.455  (95% CL:  0.375 0.537 )</span></span>
+<span><span class="co">##            Intervention:  0.145  (95% CL:  0.122 0.171 )</span></span>
+<span><span class="co">##                Efficacy:  0.681  (95% CL:  0.591 0.749 )</span></span>
+<span><span class="co">## Intracluster correlation (ICC) :  0.0793  (95% CL:  0.0416 0.117 )</span></span>
+<span><span class="co">## </span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
