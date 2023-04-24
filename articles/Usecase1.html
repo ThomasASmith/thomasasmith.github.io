@@ -126,10 +126,13 @@ object augmented with the cluster assignments. One of three different
 algorithms must be selected:</p>
 <ul>
 <li>
-<code>algorithm = "NN"</code> implements a <a href="https://en.wikipedia.org/wiki/Nearest-neighbor_chain_algorithm" class="external-link">nearest
-neighbour algorithm</a> which takes a collection of points as input, and
-creates clusters of points by repeatedly merging in points to form
-larger clusters. This is the default option.</li>
+<code>algorithm = "NN"</code> implements a nearest neighbour
+algorithm. Iteratively One household is selected and a cluster of size k
+is constructed by adding its k-1 nearest neighbors (NN). These points
+are removing these points from the data set, and this step is repeated
+iteratively until all the points have been allocated. <a href="http://jmonlong.github.io/Hippocamplus/2018/06/09/cluster-same-size/#methods" class="external-link">This
+algorithm</a> will often lead to connected clusters, in a “fish scale”
+manner. This is the default option.</li>
 <li>
 <code>algorithm = "TSP"</code> implements the
 <code>repetitive_nn</code> option of the <a href="https://cran.r-project.org/web/packages/TSP/vignettes/TSP.pdf" class="external-link"><code>TSP</code>
@@ -298,7 +301,7 @@ randomisation based on matched pairs.</p>
 <span><span class="co">## Available clusters (across both arms)                           24            </span></span>
 <span><span class="co">##   Per cluster mean number of points                             49.2            </span></span>
 <span><span class="co">##   Per cluster s.d. number of points                             3.9            </span></span>
-<span><span class="co">## S.D. of distance to nearest discordant location (km):           0.87          </span></span>
+<span><span class="co">## S.D. of distance to nearest discordant location (km):           0.88          </span></span>
 <span><span class="co">## Cluster randomization:                      Matched pairs randomized            </span></span>
 <span><span class="co">## No power calculations to report          -            </span></span>
 <span><span class="co">## </span></span>

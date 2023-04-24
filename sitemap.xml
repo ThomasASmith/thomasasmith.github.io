@@ -55,6 +55,9 @@
     <loc>/reference/anonymize_site.html</loc>
   </url>
   <url>
+    <loc>/reference/coef.CRTanalysis.html</loc>
+  </url>
+  <url>
     <loc>/reference/CRTanalysis.html</loc>
   </url>
   <url>
@@ -70,6 +73,9 @@
     <loc>/reference/CRTwrite.html</loc>
   </url>
   <url>
+    <loc>/reference/fitted.CRTanalysis.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -82,10 +88,16 @@
     <loc>/reference/plotCRT.html</loc>
   </url>
   <url>
+    <loc>/reference/predict.CRTanalysis.html</loc>
+  </url>
+  <url>
     <loc>/reference/randomizeCRT.html</loc>
   </url>
   <url>
     <loc>/reference/readdata.html</loc>
+  </url>
+  <url>
+    <loc>/reference/residuals.CRTanalysis.html</loc>
   </url>
   <url>
     <loc>/reference/simulateCRT.html</loc>
