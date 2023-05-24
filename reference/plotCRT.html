@@ -29,15 +29,16 @@ or of the results of statistical analyses of a CRT"><!-- mathjax --><script src=
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 2: Simulation of trials with geographical contamination</a>
-    <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 3: Estimation of intracluster correlations (ICC) by cluster size</a>
-    <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
-    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Power and sample size calculations allowing for contamination</a>
-    <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 8: Eggs - to fry or scramble?</a>
-    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
+    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
+    <a class="dropdown-item" href="../articles/Usecase11.html">Use Case 11: Analysis of indirect effects of interventions</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
+    <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
+    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -65,6 +66,7 @@ or of the results of statistical analyses of a CRT</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plotCRT</span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
 <span>  map <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  measure <span class="op">=</span> <span class="st">"nearestDiscord"</span>,</span>
 <span>  fill <span class="op">=</span> <span class="st">"arms"</span>,</span>
 <span>  showLocations <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  showClusterBoundaries <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -88,8 +90,12 @@ or of the results of statistical analyses of a CRT</p>
 <dd><p>logical: indicator of whether a map is required</p></dd>
 
 
+<dt>measure</dt>
+<dd><p>measure of distance or surround with options: <br></p><table class="table table"><tr><td><code>"nearestDiscord"</code></td><td>distance to nearest discordant location (km)</td></tr><tr><td><code>"disc"</code></td><td>disc</td></tr><tr><td><code>"hdep"</code></td><td>Tukey's half space depth</td></tr><tr><td><code>"sdep"</code></td><td>simplicial depth</td></tr></table></dd>
+
+
 <dt>fill</dt>
-<dd><p>fill layer of map with options:</p><table class="table table"><tr><td><code>'cluster'</code></td><td>cluster assignment</td></tr><tr><td><code>'arms'</code></td><td>arm assignment</td></tr><tr><td><code>'distance'</code></td><td>distance to the nearest discordant location</td></tr><tr><td><code>'prediction'</code></td><td>model prediction of the outcome</td></tr><tr><td><code>'none'</code></td><td>No fill</td></tr></table></dd>
+<dd><p>fill layer of map with options:</p><table class="table table"><tr><td><code>'cluster'</code></td><td>cluster assignment</td></tr><tr><td><code>'arms'</code></td><td>arm assignment</td></tr><tr><td><code>'nearestDiscord'</code></td><td>distance to the nearest discordant location</td></tr><tr><td><code>"disc"</code></td><td>disc measure of surround</td></tr><tr><td><code>"hdep"</code></td><td>Tukey's half space depth</td></tr><tr><td><code>"sdep"</code></td><td>simplicial depth</td></tr><tr><td><code>'prediction'</code></td><td>model prediction of the outcome</td></tr><tr><td><code>'none'</code></td><td>No fill</td></tr></table></dd>
 
 
 <dt>showLocations</dt>
@@ -137,12 +143,13 @@ least as long as the number of clusters.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>If <code>map = FALSE</code> and the input is a trial data frame or a <code>CRTsp</code> object, containing a randomisation
-to arms, a stacked bar chart of the the outcome grouped by distance from the boundary is produced.<br>
+    <p>If <code>map = FALSE</code> and the input is a trial data frame or a <code>CRTsp</code> object,
+containing a randomisation to arms, a stacked bar chart of the outcome
+grouped by the specified <code>measure</code> is produced. If the specified <code>measure</code>
+has not yet been calculated an error is returned<br>
 If <code>map = FALSE</code> and the input is a <code>CRTanalysis</code> object plot of the
-estimated contamination function is generated.
-The fitted contamination function is plotted as a continuous blue line against the distance
-from the nearest discordant location. Using the same axes, data summaries are plotted for
+estimated contamination function is generated. The fitted contamination function is plotted as a continuous blue line against the measure of distance
+from the nearest discordant location or of surround. Using the same axes, data summaries are plotted for
 ten categories of distance from the boundary. Both the
 average of the outcome and confidence intervals are plotted.</p><ul><li><p>For analyses with logit link function the outcome is plotted as a proportion. <br></p></li>
 <li><p>For analyses with log link function the outcome is plotted on a scale of the Williams' mean

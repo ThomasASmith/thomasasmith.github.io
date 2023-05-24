@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   CRTspat: CRTspat.html
   Usecase1: Usecase1.html
+  Usecase11: Usecase11.html
   Usecase2: Usecase2.html
   Usecase3: Usecase3.html
   Usecase4: Usecase4.html
@@ -12,5 +13,5 @@ articles:
   Usecase7: Usecase7.html
   Usecase8: Usecase8.html
   Usecase9: Usecase9.html
-last_built: 2023-04-24T12:03Z
+last_built: 2023-05-24T10:10Z
 

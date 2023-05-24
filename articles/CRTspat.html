@@ -44,15 +44,16 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 1: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 2: Simulation of trials with geographical contamination</a>
-    <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 3: Estimation of intracluster correlations (ICC) by cluster size</a>
-    <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 4: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 5: Analysis of trials (including methods for analysing contamination)</a>
-    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 6: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 7: Power and sample size calculations allowing for contamination</a>
-    <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 8: Eggs - to fry or scramble?</a>
-    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 9: Preparation of datasets for `CRTspat`</a>
+    <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
+    <a class="dropdown-item" href="../articles/Usecase11.html">Use Case 11: Analysis of indirect effects of interventions</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
+    <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
+    <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
 </li>
       </ul>
@@ -76,7 +77,7 @@
                         <h4 data-toc-skip class="author">Tom Smith, Lea
 Multerer</h4>
             
-            <h4 data-toc-skip class="date">2023-04-24</h4>
+            <h4 data-toc-skip class="date">2023-05-24</h4>
       
       
       <div class="d-none name"><code>CRTspat.Rmd</code></div>
@@ -112,8 +113,9 @@ field sites and trials, and observed spatial patterns of outcomes, or on
 geographical information from novel sites.</li>
 </ul>
 <p>The package builds on the work of <a href="https://trialsjournal.biomedcentral.com/articles/10.1186/s13063-021-05543-8" class="external-link">Multerer
-<em>et al.</em> (2021a)</a> and <a href="https://malariajournal.biomedcentral.com/articles/10.1186/s12936-021-03924-7" class="external-link">Multerer
-<em>et al.</em> (2021b)</a>.</p>
+<em>et al.</em> (2021a)</a>, <a href="https://malariajournal.biomedcentral.com/articles/10.1186/s12936-021-03924-7" class="external-link">Multerer
+<em>et al.</em> (2021b)</a> and <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/biom.13316" class="external-link">Anaya-Izquierdo
+&amp; Alexander(2020)</a>.</p>
 <p>The package is intended to function with outcomes that are
 proportions, count data, or continuous variables. The current version
 (0.1.0.9000) is for <strong>testing</strong> and has been developed
@@ -155,7 +157,9 @@ locations (if required for sharing reference datasets)</a></p>
 </h2>
 <p><code>CRTspat</code> is on <a href="https://github.com/ThomasASmith/CRTspat/" class="external-link">github</a> and can be
 installed using:</p>
-<p><code>install.packages("devtools") library(devtools) install_github("thomasasmith/CRTspat")</code></p>
+<p><code>install.packages("devtools")</code>
+<code><a href="https://devtools.r-lib.org/" class="external-link">library(devtools)</a></code>
+<code>install_github("thomasasmith/CRTspat")</code></p>
 <p>You may need to install other packages on which <code>CRTspat</code>
 depends. In particular, some of the functionality depends on <a href="https://www.r-inla.org/" class="external-link">R-INLA</a> and <a href="https://cran.r-project.org/web/packages/jagsUI/index.html" class="external-link">jagsUI</a>
 and you may want to install, however it may be possible to get much of
