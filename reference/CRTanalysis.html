@@ -28,7 +28,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase11.html">Use Case 11: Analysis of indirect effects of interventions</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
@@ -63,8 +62,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CRTanalysis</span><span class="op">(</span></span>
 <span>  <span class="va">trial</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"GEE"</span>,</span>
-<span>  measure <span class="op">=</span> <span class="st">"nearestDiscord"</span>,</span>
-<span>  beta <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"nearestDiscord"</span>,</span>
+<span>  scale_par <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cfunc <span class="op">=</span> <span class="st">"L"</span>,</span>
 <span>  link <span class="op">=</span> <span class="st">"logit"</span>,</span>
 <span>  numerator <span class="op">=</span> <span class="st">"num"</span>,</span>
@@ -77,7 +76,6 @@
 <span>  personalProtection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  clusterEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  spatialEffects <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  resamples <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  requireMesh <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  inla_mesh <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -94,11 +92,11 @@ assignments (factor <code>cluster</code>), and arm assignments (factor <code>arm
 <dd><p>statistical method with options:</p><table class="table table"><tr><td><code>"EMP"</code></td><td>simple averages of the data</td></tr><tr><td><code>"T"</code></td><td>comparison of cluster means by t-test</td></tr><tr><td><code>"GEE"</code></td><td>Generalised Estimating Equations</td></tr><tr><td><code>"LME4"</code></td><td>Generalized Linear Mixed-Effects Models</td></tr><tr><td><code>"INLA"</code></td><td>Integrated Nested Laplace Approximation (INLA)</td></tr><tr><td><code>"MCMC"</code></td><td>Markov chain Monte Carlo using <code>"JAGS"</code></td></tr></table></dd>
 
 
-<dt>measure</dt>
-<dd><p>measure of distance or surround with options: <br></p><table class="table table"><tr><td><code>"nearestDiscord"</code></td><td>distance to nearest discordant location (km)</td></tr><tr><td><code>"disc"</code></td><td>disc</td></tr><tr><td><code>"hdep"</code></td><td>Tukey's half space depth</td></tr><tr><td><code>"sdep"</code></td><td>simplicial depth</td></tr></table></dd>
+<dt>distance</dt>
+<dd><p>Measure of distance or surround with options: <br></p><table class="table table"><tr><td><code>"nearestDiscord"</code></td><td>distance to nearest discordant location (km)</td></tr><tr><td><code>"disc"</code></td><td>disc</td></tr><tr><td><code>"kern"</code></td><td>surround based on sum of normal kernels</td></tr><tr><td><code>"hdep"</code></td><td>Tukey's half space depth</td></tr><tr><td><code>"sdep"</code></td><td>simplicial depth</td></tr></table></dd>
 
 
-<dt>beta</dt>
+<dt>scale_par</dt>
 <dd><p>numeric: pre-specified value of contamination parameter or disc radius</p></dd>
 
 
@@ -152,16 +150,12 @@ With the <code>"INLA"</code> and <code>"MCMC"</code> methods 'iid' random effect
 <dd><p>logical: indicator of whether the model includes spatial random effects</p></dd>
 
 
-<dt>resamples</dt>
-<dd><p>integer: number of samples for sample-based intervals</p></dd>
-
-
 <dt>requireMesh</dt>
 <dd><p>logical: indicator of whether spatial predictions are required</p></dd>
 
 
 <dt>inla_mesh</dt>
-<dd><p>string: name of pre-existing INLA input object created by <code><a href="new_mesh.html">new_mesh()</a></code></p></dd>
+<dd><p>string: name of pre-existing INLA input object created by <code><a href="compute_mesh.html">compute_mesh()</a></code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -190,7 +184,7 @@ are provided in the <a href="https://thomasasmith.github.io/articles/Usecase5.ht
 The <code>model_object</code> in the output list is the usual output from the statistical analysis routine,
 and can be also be inspected with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, or analysed using <code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">stats::fitted()</a></code>
 for purposes of evaluation of model fit etc..<br><br></p>
-<p><code>beta</code> specifies the contamination parameter. If <code>measure = "disc"</code> then this is the disc radius in km.</p>
+<p><code>scale_par</code> specifies the contamination parameter. If <code>distance = "disc"</code> then this is the disc radius in km.</p>
     </div>
 
     <div class="section level2">
@@ -206,39 +200,46 @@ for purposes of evaluation of model fit etc..<br><br></p>
 <span class="r-in"><span><span class="va">exampleLME4</span> <span class="op">&lt;-</span> <span class="fu">CRTanalysis</span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">exampleLME4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No non-linear parameter.  No fixed effects of distance -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis method:  T </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Link function:  logit </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:  arm + (1 | cluster) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No modelling of contamination </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:      Control:  0.364  (95% CL:  0.286 0.451 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Intervention:  0.21  (95% CL:  0.147 0.292 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Efficacy:  0.423  (95% CL:  0.208 0.727 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.364  (95% CL:  0.286 0.451 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.21  (95% CL:  0.147 0.292 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.423  (95% CL:  0.208 0.727 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> P-value (2-sided):  0.006879064 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No non-linear parameter.  No fixed effects of distance -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis method:  GEE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Link function:  logit </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:  arm </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No modelling of contamination </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:      Control:  0.373  (95% CL:  0.306 0.445 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Intervention:  0.228  (95% CL:  0.167 0.305 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Efficacy:  0.388  (95% CL:  0.131 0.575 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Intracluster correlation (ICC) :  0.0573  (95% CL:  0.00643 0.108 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.373  (95% CL:  0.306 0.445 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.228  (95% CL:  0.167 0.305 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.388  (95% CL:  0.121 0.572 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Intracluster correlation (ICC)  :  0.0573  (95% CL:  0.00643 0.108 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.44 Signed distance -Signed distance to other arm (km)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis method:  LME4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Link function:  logit </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Measure of distance or surround:  Nearest discordant location </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Measure of distance or surround: Signed distance to other arm (km)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.44</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:  pvar + (1 | cluster) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error function model for contamination</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:      Control:  0.417  (95% CL:  0.331 0.509 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Intervention:  0.187  (95% CL:  0.136 0.25 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Efficacy:  0.552  (95% CL:  0.325 0.702 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contamination range(km):  1.73  (95% CL:  1.7 1.74 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> % locations contaminated: 68.2  (95% CL:  67.7 68.8  %)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> deviance:  1374.215 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AIC     :  1382.215 including penalty for the contamination scale parameter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.417  (95% CL:  0.331 0.507 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.187  (95% CL:  0.135 0.25 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.551  (95% CL:  0.329 0.702 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contamination range(km):  4.2  (95% CL:  4.18 4.21 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> % locations contaminated: 90.2  (95% CL:  89.4 91.1 %)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total effect            : 0.229  (95% CL:  0.116 0.343 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ipsilateral Spillover   : 0.0227  (95% CL:  0.0127 0.0315 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contralateral Spillover : 0.0405  (95% CL:  0.0192 0.0633 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> deviance:  1374.216 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC     :  1382.216 including penalty for the contamination scale parameter</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

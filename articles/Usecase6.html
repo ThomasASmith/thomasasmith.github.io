@@ -45,7 +45,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase11.html">Use Case 11: Analysis of indirect effects of interventions</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
@@ -151,22 +150,28 @@ contamination zone, corresponding to those locations that fall within
 the central 95% of the estimated sigmoid of the of the effect size by
 distance from the boundary between the arms.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">exampleCRT</span>, cfunc <span class="op">=</span> <span class="st">"P"</span>, method <span class="op">=</span> <span class="st">"LME4"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysis</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">exampleCRT</span>, cfunc <span class="op">=</span> <span class="st">"P"</span>, method <span class="op">=</span> <span class="st">"LME4"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Estimated scale parameter: 0.44 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysis</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
-<span><span class="co">## Measure of distance or surround:  Nearest discordant location </span></span>
+<span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
+<span><span class="co">## Estimated scale parameter: 0.44</span></span>
 <span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
 <span><span class="co">## Error function model for contamination</span></span>
-<span><span class="co">## Estimates:      Control:  0.418  (95% CL:  0.331 0.508 )</span></span>
-<span><span class="co">##            Intervention:  0.187  (95% CL:  0.136 0.251 )</span></span>
-<span><span class="co">##                Efficacy:  0.552  (95% CL:  0.334 0.701 )</span></span>
-<span><span class="co">## Contamination range(km):  1.73  (95% CL:  1.7 1.74 )</span></span>
-<span><span class="co">## % locations contaminated: 68.2  (95% CL:  67.7 68.8  %)</span></span>
-<span><span class="co">## deviance:  1374.215 </span></span>
-<span><span class="co">## AIC     :  1382.215 including penalty for the contamination scale parameter</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.33 0.51 )</span></span>
+<span><span class="co">##             Intervention:  0.187  (95% CL:  0.136 0.251 )</span></span>
+<span><span class="co">##                 Efficacy:  0.552  (95% CL:  0.329 0.701 )</span></span>
+<span><span class="co">## Contamination range(km):  4.2  (95% CL:  4.18 4.21 )</span></span>
+<span><span class="co">## % locations contaminated: 90.2  (95% CL:  89.4 91.1 %)</span></span>
+<span><span class="co">## Total effect            : 0.23  (95% CL:  0.115 0.345 )</span></span>
+<span><span class="co">## Ipsilateral Spillover   : 0.0227  (95% CL:  0.0126 0.0317 )</span></span>
+<span><span class="co">## Contralateral Spillover : 0.0405  (95% CL:  0.0189 0.0635 )</span></span>
+<span><span class="co">## deviance:  1374.216 </span></span>
+<span><span class="co">## AIC     :  1382.216 including penalty for the contamination scale parameter</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'arms'</span>, showBuffer<span class="op">=</span><span class="cn">TRUE</span>, showClusterBoundaries <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Buffer corresponds to estimated contamination zone</span></span></code></pre>
@@ -178,12 +183,15 @@ contamination function </em>
 <img src="example6e.r-2.png"><br><em>Fig 6.7 Arms with contamination
 zone shaded </em>
 </p>
-<p>##Conclusions</p>
+<div class="section level2">
+<h2 id="conclusions">Conclusions<a class="anchor" aria-label="anchor" href="#conclusions"></a>
+</h2>
 <p>In this example, a large proportion of the data points are close to
 the boundary between the arms. The analysis (based on simulated
 contamination) suggests that there are effects of contamination far
 beyond a 500m buffer. However this does not necessarily mean that the
 contamination leads to a large bias or loss in power (see <a href="Usecase7.html">Use Case 7</a>).</p>
+</div>
   </main>
 </div>
 

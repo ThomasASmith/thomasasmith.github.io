@@ -45,7 +45,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase11.html">Use Case 11: Analysis of indirect effects of interventions</a>
     <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
@@ -267,13 +266,13 @@ Details of the implementation in <code>CRTspat</code> are in the <a href="../ref
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span></span>
 <span><span class="va">examplemesh100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">"examplemesh100.txt"</span><span class="op">)</span></span>
 <span><span class="va">baselineanalysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example_clustered</span>,</span>
-<span>                        method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, baselineOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                        baselineNumerator <span class="op">=</span> <span class="st">"RDT_test_result"</span>, baselineDenominator <span class="op">=</span> <span class="st">"base_denom"</span>,</span>
-<span>                        clusterEffects <span class="op">=</span> <span class="cn">FALSE</span>, spatialEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                        requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="va">examplemesh100</span><span class="op">)</span></span></code></pre></div>
+<span>                     method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, baselineOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     baselineNumerator <span class="op">=</span> <span class="st">"RDT_test_result"</span>,</span>
+<span>                     baselineDenominator <span class="op">=</span>  <span class="st">"base_denom"</span>,</span>
+<span>                     clusterEffects <span class="op">=</span> <span class="cn">FALSE</span>, spatialEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="va">examplemesh100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Analysis of baseline only, using INLA</span></span></code></pre>
-<pre><code><span><span class="co">## as(&lt;dgCMatrix&gt;, "dgTMatrix") is deprecated since Matrix 1.5-0; do as(., "TsparseMatrix") instead</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">baselineanalysis</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example1c.r-1.png"><br><em>Fig 1.3 Smoothed surface of
@@ -282,7 +281,7 @@ baseline prevalence</em>
 <p>A summary of the baseline prevalence at cluster level is used in this
 example to match clusters on baseline prevalence and then generate a
 randomisation based on matched pairs.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_randomized</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randomizeCRT.html">randomizeCRT</a></span><span class="op">(</span><span class="va">example_clustered</span>, matchedPair <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  baselineNumerator <span class="op">=</span> <span class="st">"RDT_test_result"</span>, baselineDenominator <span class="op">=</span> <span class="st">"base_denom"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example_randomized</span><span class="op">)</span></span></code></pre></div>
@@ -302,13 +301,13 @@ randomisation based on matched pairs.</p>
 <span><span class="co">## Available clusters (across both arms)                           24            </span></span>
 <span><span class="co">##   Per cluster mean number of points                             49.2            </span></span>
 <span><span class="co">##   Per cluster s.d. number of points                             3.9            </span></span>
-<span><span class="co">## S.D. of distance to nearest discordant location (km):           0.9          </span></span>
+<span><span class="co">## S.D. of distance to nearest discordant location (km):           0.72          </span></span>
 <span><span class="co">## Cluster randomization:                      Matched pairs randomized            </span></span>
 <span><span class="co">## No power calculations to report          -            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Other variables in dataset</span></span>
 <span><span class="co">## --------------------------          RDT_test_result  base_denom  base_num  pair</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, maskbuffer<span class="op">=</span><span class="fl">0.2</span>, legend.position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>,<span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example1d.r-1.png"><br><em>Fig 1.4 Map of arm
