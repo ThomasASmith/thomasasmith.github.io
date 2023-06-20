@@ -142,23 +142,20 @@ supplied</td>
 <code>propensity</code> is generated as a normal
 kernel, with the bandwidth adjusted to achieve the input value of the
 <code>ICC_inp</code> (after the further smoothing stage to simulate
-contamination)</td>
+contamination (see below))</td>
 </tr>
 </tbody>
 </table>
-<p>Contamination or spillover between trial arms is modelled as a
-additional smoothing process applied to the <code>propensity</code> via
-a normal kernel. In the case of malaria this is proposed as an
-approximation to the effect of mosquito movement. The degree of
-spillover is specified either as a contamination range with the
-<code>theta_inp</code> parameter, or as <code>sd</code>, the bandwidth
-of the corresponding normal kernel. If both are provided then it is the
-value of <code>theta_inp</code> that is used. The effect is modelled by
-applying an <a href="Usecase5.html">inverse probit (error function)
-transformation</a> to the <code>propensity</code>: <span class="math inline">\(P\left( d \right) = \frac{1}{2}\left( 1\  + \
-erf\left( \frac{\text{d/σ}}{\sqrt{2}} \right) \right)\)</span>, where σ
-is the value of <code>sd</code> and <span class="math inline">\(d\)</span> is the distance to the boundary between
-the arms.</p>
+<p>The effect of intervention is simulated as a fixed percentage
+reduction in the <code>propensity</code>. Contamination or spillover
+between trial arms is then modelled as a additional smoothing process
+applied to the intervention-adjusted <code>propensity</code> via a
+further bivariate normal kernel. In the case of mosquito borne disease
+this is proposed as an approximation to the effect of mosquito movement.
+The degree of spillover is specified either as a contamination range
+with the <code>theta_inp</code> parameter, or as <code>sd</code>, the
+bandwidth of the corresponding normal kernel. If both are provided then
+it is the value of <code>theta_inp</code> that is used.</p>
 <div class="section level4">
 <h4 id="example-with-baseline-data-provided-as-proportions">Example with baseline data provided as proportions<a class="anchor" aria-label="anchor" href="#example-with-baseline-data-provided-as-proportions"></a>
 </h4>
@@ -196,7 +193,7 @@ the arms.</p>
 <span><span class="co">## Other variables in dataset</span></span>
 <span><span class="co">## --------------------------          RDT_test_result  base_denom</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>, map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">example2a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulateCRT.html">simulateCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>,</span>
 <span>           effect <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>           outcome0 <span class="op">=</span> <span class="fl">0.5</span>,</span>
@@ -244,27 +241,32 @@ the arms.</p>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm + (1 | cluster) </span></span>
 <span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:       Control:  0.481  (95% CL:  0.381 0.582 )</span></span>
-<span><span class="co">##             Intervention:  0.117  (95% CL:  0.0827 0.162 )</span></span>
-<span><span class="co">##                 Efficacy:  0.757  (95% CL:  0.758 0.916 )</span></span>
+<span><span class="co">## Estimates:       Control:  0.461  (95% CL:  0.384 0.54 )</span></span>
+<span><span class="co">##             Intervention:  0.132  (95% CL:  0.0841 0.2 )</span></span>
+<span><span class="co">##                 Efficacy:  0.715  (95% CL:  0.69 0.899 )</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">## P-value (2-sided):  1.187747e-07</span></span></code></pre>
+<span><span class="co">## P-value (2-sided):  1.848347e-06</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example2aINLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example2a</span>,</span>
-<span>                 method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, cfunc <span class="op">=</span> <span class="st">'X'</span>,</span>
-<span>                 clusterEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aanalysis</span><span class="op">)</span></span>
+<span><span class="va">example2aINLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span>trial<span class="op">=</span><span class="va">example2a</span>,</span>
+<span>                 method <span class="op">=</span> <span class="st">'INLA'</span>, link<span class="op">=</span><span class="st">'logit'</span>, cfunc <span class="op">=</span> <span class="st">'Z'</span>,</span>
+<span>                 clusterEffects <span class="op">=</span> <span class="cn">FALSE</span>, spatialEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                 requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="va">examplemesh100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## No non-linear parameter.  No fixed effects of distance -</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aINLA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aINLA</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span>, showClusterBoundaries <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2aINLA</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span>,</span>
+<span>  showClusterBoundaries <span class="op">=</span> <span class="cn">TRUE</span>, legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>
-<img src="example2a.r-1.png"><br><em>Fig 2.1 Map of simulated outcome
-at cluster level</em>
+<img src="example2a.r-1.png"><br><em>Fig 2.1 Map of allocations of
+clusters to arms</em>
 </p>
 <p>
-<img src="example2a.r-2.png"><br><em>Fig 2.2 Variation in outcome by
-distance from boundary</em>
+<img src="example2a.r-2.png"><br><em>Fig 2.2 Plot of data by distance
+to other arm</em>
+</p>
+<p>
+<img src="example2a.r-3.png"><br><em>Fig 2.3 Smoothed outcome from
+geostatistical model</em>
 </p>
 </div>
 <div class="section level4">
@@ -324,15 +326,15 @@ distance from boundary</em>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm </span></span>
 <span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:       Control:  0.475  (95% CL:  0.407 0.544 )</span></span>
-<span><span class="co">##             Intervention:  0.125  (95% CL:  0.103 0.151 )</span></span>
-<span><span class="co">##                 Efficacy:  0.737  (95% CL:  0.663 0.793 )</span></span>
-<span><span class="co">## Intracluster correlation (ICC)  :  0.0562  (95% CL:  0.0261 0.0862 )</span></span>
+<span><span class="co">## Estimates:       Control:  0.46  (95% CL:  0.392 0.53 )</span></span>
+<span><span class="co">##             Intervention:  0.14  (95% CL:  0.116 0.168 )</span></span>
+<span><span class="co">##                 Efficacy:  0.696  (95% CL:  0.612 0.759 )</span></span>
+<span><span class="co">## Intracluster correlation (ICC)  :  0.0573  (95% CL:  0.0243 0.0903 )</span></span>
 <span><span class="co">## </span></span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example2b</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'clusters'</span>, showClusterLabels <span class="op">=</span> <span class="cn">TRUE</span>, maskbuffer <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p>
-<img src="example2b.r-1.png"><br><em>Fig 2.3 Map of clusters in
+<img src="example2b.r-1.png"><br><em>Fig 2.4 Map of clusters in
 simulated trial</em>
 </p>
 </div>
@@ -368,10 +370,10 @@ overall initial prevalence and ICC<a class="anchor" aria-label="anchor" href="#e
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm </span></span>
 <span><span class="co">## No modelling of contamination </span></span>
-<span><span class="co">## Estimates:       Control:  0.455  (95% CL:  0.375 0.537 )</span></span>
-<span><span class="co">##             Intervention:  0.145  (95% CL:  0.122 0.171 )</span></span>
-<span><span class="co">##                 Efficacy:  0.681  (95% CL:  0.591 0.749 )</span></span>
-<span><span class="co">## Intracluster correlation (ICC)  :  0.0793  (95% CL:  0.0416 0.117 )</span></span>
+<span><span class="co">## Estimates:       Control:  0.465  (95% CL:  0.384 0.547 )</span></span>
+<span><span class="co">##             Intervention:  0.135  (95% CL:  0.112 0.161 )</span></span>
+<span><span class="co">##                 Efficacy:  0.71  (95% CL:  0.623 0.774 )</span></span>
+<span><span class="co">## Intracluster correlation (ICC)  :  0.0823  (95% CL:  0.0363 0.128 )</span></span>
 <span><span class="co">## </span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

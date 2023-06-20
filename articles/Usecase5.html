@@ -262,7 +262,7 @@ whether contamination has led to an important bias.</p>
 contamination between arms, or spillover effects either as function of a
 Euclidean distance or as a function of a surround measure:</p>
 <div class="section level4">
-<h4 id="models-do-not-consider-spillover">Models do not consider spillover<a class="anchor" aria-label="anchor" href="#models-do-not-consider-spillover"></a>
+<h4 id="models-that-do-not-consider-spillover">Models that do not consider spillover<a class="anchor" aria-label="anchor" href="#models-that-do-not-consider-spillover"></a>
 </h4>
 <p>Models that do not consider contamination can be fitted using options
 <code>Z</code> and <code>X</code>. These are included both to allow
@@ -328,9 +328,8 @@ for\ d\  &lt; \ 0 \\  P\left( d \right) = \ 1\ for\ d\  &gt; \ 0
 <tr class="even">
 <td><code>P</code></td>
 <td>inverse probit (error function)</td>
-<td><span class="math inline">\(P\left( d \right) = \frac{1}{2}\left(
-1\  + \ erf\left( \frac{\text{d}{ S\sqrt{2}} \right)
-\right)\)</span></td>
+<td><span class="math inline">\(P\left( d \right) = 1\ +\
+erf\left(\frac{d}{S\sqrt2}\right)\)</span></td>
 <td>
 <code>LME4</code> <code>INLA</code> <code>MCMC</code>
 </td>
@@ -398,46 +397,46 @@ estimated.</p>
 <span><span class="co">## AIC     :  1385.898</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_P</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 0.44 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
+<pre><code><span><span class="co">## Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_P</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 0.44</span></span>
+<span><span class="co">## Estimated scale parameter: 0.45</span></span>
 <span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
 <span><span class="co">## Error function model for contamination</span></span>
-<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.33 0.507 )</span></span>
-<span><span class="co">##             Intervention:  0.187  (95% CL:  0.136 0.251 )</span></span>
-<span><span class="co">##                 Efficacy:  0.551  (95% CL:  0.325 0.701 )</span></span>
-<span><span class="co">## Contamination range(km):  4.2  (95% CL:  4.18 4.21 )</span></span>
-<span><span class="co">## % locations contaminated: 90.2  (95% CL:  89.4 91.1 %)</span></span>
-<span><span class="co">## Total effect            : 0.229  (95% CL:  0.113 0.342 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0227  (95% CL:  0.0124 0.0315 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0404  (95% CL:  0.0186 0.0632 )</span></span>
-<span><span class="co">## deviance:  1374.216 </span></span>
-<span><span class="co">## AIC     :  1382.216 including penalty for the contamination scale parameter</span></span></code></pre>
+<span><span class="co">## Estimates:       Control:  0.418  (95% CL:  0.331 0.509 )</span></span>
+<span><span class="co">##             Intervention:  0.186  (95% CL:  0.136 0.25 )</span></span>
+<span><span class="co">##                 Efficacy:  0.553  (95% CL:  0.327 0.703 )</span></span>
+<span><span class="co">## Contamination range(km):  4.22  (95% CL:  4.2 4.23 )</span></span>
+<span><span class="co">## % locations contaminated: 91.6  (95% CL:  90.6 92 %)</span></span>
+<span><span class="co">## Total effect            : 0.23  (95% CL:  0.114 0.344 )</span></span>
+<span><span class="co">## Ipsilateral Spillover   : 0.0233  (95% CL:  0.0127 0.0323 )</span></span>
+<span><span class="co">## Contralateral Spillover : 0.0417  (95% CL:  0.0192 0.0651 )</span></span>
+<span><span class="co">## deviance:  1374.215 </span></span>
+<span><span class="co">## AIC     :  1382.215 including penalty for the contamination scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_L</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"L"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 0.248 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
+<pre><code><span><span class="co">## Estimated scale parameter: 0.249 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_L</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 0.248</span></span>
+<span><span class="co">## Estimated scale parameter: 0.249</span></span>
 <span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
 <span><span class="co">## Sigmoid (logistic) function for contamination</span></span>
-<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.332 0.509 )</span></span>
+<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.332 0.51 )</span></span>
 <span><span class="co">##             Intervention:  0.186  (95% CL:  0.136 0.249 )</span></span>
-<span><span class="co">##                 Efficacy:  0.551  (95% CL:  0.329 0.699 )</span></span>
+<span><span class="co">##                 Efficacy:  0.552  (95% CL:  0.329 0.7 )</span></span>
 <span><span class="co">## Contamination range(km):  4.26  (95% CL:  4.24 4.28 )</span></span>
-<span><span class="co">## % locations contaminated: 92.7  (95% CL:  92.2 93 %)</span></span>
-<span><span class="co">## Total effect            : 0.229  (95% CL:  0.115 0.341 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0218  (95% CL:  0.0121 0.0303 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0386  (95% CL:  0.0182 0.0602 )</span></span>
+<span><span class="co">## % locations contaminated: 92.7  (95% CL:  92.2 93.1 %)</span></span>
+<span><span class="co">## Total effect            : 0.229  (95% CL:  0.115 0.342 )</span></span>
+<span><span class="co">## Ipsilateral Spillover   : 0.0219  (95% CL:  0.0121 0.0304 )</span></span>
+<span><span class="co">## Contralateral Spillover : 0.0388  (95% CL:  0.0183 0.0604 )</span></span>
 <span><span class="co">## deviance:  1374.201 </span></span>
 <span><span class="co">## AIC     :  1382.201 including penalty for the contamination scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -602,7 +601,7 @@ with the scale parameter estimated in the same way as in the scale
 parameter in other models (see above Table 5.2).</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">examples_hdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  Surround: -Tukey's half-depth</span></span></code></pre>
+<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Tukey's half-depth</span></span></code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_hdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
@@ -625,7 +624,7 @@ parameter in other models (see above Table 5.2).</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_hdep</span>,legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">examples_sdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"sdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  Surround: -Simplicial depth</span></span></code></pre>
+<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Simplicial depth</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
@@ -648,7 +647,7 @@ parameter in other models (see above Table 5.2).</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span>
 <span><span class="va">examples_disc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Precalculated scale parameter: 0.15 Surround: -disc of radius 0.15 km</span></span></code></pre>
+<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***Precalculated scale parameter: 0.15 Surround: -disc of radius 0.15 km</span></span></code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
@@ -671,7 +670,7 @@ parameter in other models (see above Table 5.2).</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span>
 <span><span class="va">examples_kern</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Precalculated scale parameter: 0.15 Surround: -kern with kernel s.d. 0.15 km</span></span></code></pre>
+<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***Precalculated scale parameter: 0.15 Surround: -kern with kernel s.d. 0.15 km</span></span></code></pre>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
