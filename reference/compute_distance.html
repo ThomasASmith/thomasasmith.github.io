@@ -95,22 +95,21 @@ If <code>distance = "disc"</code> is specified, the disc statistic is computed f
 within the specified radius that are in the intervention arm
 (<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/biom.13316" class="external-link">Anaya-Izquierdo &amp; Alexander(2020)</a>). The input
 value of <code>scale_par</code> is stored in the <code>design</code> list
-of the output <code>"CRTsp"</code> object. The values are divided by their maximum to give
-a variable on a scale of 0 - 1. Recalculation is carried out if the input value of
-<code>scale_par</code> differs from the one in the input <code>design</code> list.<br><br>
+of the output <code>"CRTsp"</code> object. Recalculation is carried out if the input value of
+<code>scale_par</code> differs from the one in the input <code>design</code> list. The value of the the surround calculated
+based on intervened locations is divided by the value of the surround calculated on the basis of all locations, so the
+value returned is a proportion.<br><br>
 If <code>distance = "kern"</code> is specified, the Normal curve with standard deviation
 <code>scale_par</code> is used to simulate diffusion of the intervention effect by Euclidean
 distance. For each location in the trial, the contributions of all intervened locations are
-summed. The value of this statistic is divided by its maximum to give
-a variable on a scale of 0 - 1.<br><br>
+summed. As with <code>distance = "disc"</code> when <code>distance = "kern"</code> the surround calculated
+based on intervened locations is divided by the value of the surround calculated on the basis of all locations, so the
+value returned is a proportion.<br><br>
 If either <code>distance = "hdep"</code> or <code>distance = "sdep"</code> is specified then both the simplicial depth and
 Tukey's half space depth are calculated using the algorithm of
-<a href="https://www.jstor.org/stable/2986073" class="external-link">Rousseeuw &amp; Ruts(1996)</a>. For a location in the intervention arm, the
-depth is computed with respect to all other locations in the intervention arm. For a location in the control arm
-the depth is computed relative to all intervention locations
-(<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/biom.13316" class="external-link">Anaya-Izquierdo &amp; Alexander(2020)</a>). The values of the
-both the simplicial depth and Tukey's half space depth are  divided by their maxima to give
-variables on a scale of 0 - 1.<br></p>
+<a href="https://www.jstor.org/stable/2986073" class="external-link">Rousseeuw &amp; Ruts(1996)</a>. The half-depth probability within the intervention cloud (di) is computed
+with respect to other locations in the intervention arm (<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/biom.13316" class="external-link">Anaya-Izquierdo &amp; Alexander(2020)</a>). The half-depth within
+the half-depth within the control cloud (dc) is also computed. <code>CRTspat</code> returns the proportion di/(dc + di). <br></p>
     </div>
 
     <div class="section level2">
