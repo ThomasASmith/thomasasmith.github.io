@@ -106,8 +106,7 @@ options are:</p><table class="table table"><tr><td><code>"Z"</code></td><td></td
 
 
 <dt>link</dt>
-<dd><p>link function. options are:</p><table class="table table"><tr><td><code>"logit"</code></td><td>(the default). <code>numerator</code> has a binomial distribution with denominator <code>denominator</code>.</td></tr><tr><td><code>"log"</code></td><td><code>numerator</code> is Poisson distributed with an offset of log(<code>denominator</code>).
-With the <code>"INLA"</code> and <code>"MCMC"</code> methods 'iid' random effects are used to model extra-Poisson variation.</td></tr><tr><td><code>"identity"</code></td><td>The outcome is <code>numerator/denominator</code> with a normally distributed error function.</td></tr></table></dd>
+<dd><p>link function. options are:</p><table class="table table"><tr><td><code>"logit"</code></td><td>(the default). <code>numerator</code> has a binomial distribution with denominator <code>denominator</code>.</td></tr><tr><td><code>"log"</code></td><td><code>numerator</code> is Poisson distributed with an offset of log(<code>denominator</code>).</td></tr><tr><td><code>"cloglog"</code></td><td><code>numerator</code> is Bernoulli distributed with an offset of log(<code>denominator</code>).</td></tr><tr><td><code>"identity"</code></td><td>The outcome is <code>numerator/denominator</code> with a normally distributed error function.</td></tr></table></dd>
 
 
 <dt>numerator</dt>
@@ -183,8 +182,12 @@ are provided in the <a href="https://thomasasmith.github.io/articles/Usecase5.ht
 <p>The key results of the analyses can be extracted using a <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> of the output list.
 The <code>model_object</code> in the output list is the usual output from the statistical analysis routine,
 and can be also be inspected with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, or analysed using <code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">stats::fitted()</a></code>
-for purposes of evaluation of model fit etc..<br><br></p>
-<p><code>scale_par</code> specifies the contamination parameter. If <code>distance = "disc"</code> then this is the disc radius in km.</p>
+for purposes of evaluation of model fit etc..<br></p>
+<p>For <code>link = "cloglog"</code> (<a href="https://doi.org/10.1016/S1047-2797(97)00106-3" class="external-link">Complementary log-log</a>)
+the numerator must be coded as 0 or 1. Technically the binomial denominator is then 1. The
+<code>denominator</code> field is used as a rate multiplier.<br></p>
+<p>With the <code>"INLA"</code> and <code>"MCMC"</code> methods 'iid' random effects are used to model extra-Poisson variation.<br></p>
+<p><code>scale_par</code> specifies the contamination parameter for models where this is fixed (<code>cfunc = "R"</code>.<br><br></p>
     </div>
 
     <div class="section level2">
@@ -221,7 +224,7 @@ for purposes of evaluation of model fit etc..<br><br></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No modelling of contamination </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.373  (95% CL:  0.306 0.445 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.228  (95% CL:  0.167 0.305 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.388  (95% CL:  0.128 0.574 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.388  (95% CL:  0.134 0.57 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Intracluster correlation (ICC)  :  0.0573  (95% CL:  0.00643 0.108 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span>
@@ -233,14 +236,14 @@ for purposes of evaluation of model fit etc..<br><br></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:  pvar + (1 | cluster) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error function model for contamination</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.418  (95% CL:  0.333 0.511 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.186  (95% CL:  0.135 0.25 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.554  (95% CL:  0.335 0.705 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.417  (95% CL:  0.33 0.507 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.186  (95% CL:  0.136 0.25 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.554  (95% CL:  0.329 0.703 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contamination range(km):  4.22  (95% CL:  4.2 4.23 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % locations contaminated: 91.6  (95% CL:  90.6 92 %)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total effect            : 0.231  (95% CL:  0.118 0.347 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ipsilateral Spillover   : 0.0234  (95% CL:  0.0131 0.0325 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contralateral Spillover : 0.0417  (95% CL:  0.0199 0.0655 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total effect            : 0.23  (95% CL:  0.112 0.343 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ipsilateral Spillover   : 0.0233  (95% CL:  0.0125 0.0321 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contralateral Spillover : 0.0417  (95% CL:  0.019 0.0647 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> deviance:  1374.215 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AIC     :  1382.215 including penalty for the contamination scale parameter</span>
 </code></pre></div>
