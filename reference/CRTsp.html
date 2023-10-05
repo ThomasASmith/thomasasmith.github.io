@@ -12,7 +12,7 @@ into objects of class "CRTsp" or creates a new "CRTsp" object by simulating a se
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,9 @@ into objects of class "CRTsp" or creates a new "CRTsp" object by simulating a se
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -112,7 +115,7 @@ any other variables required for subsequent analysis.</p></dd>
 a description of the geography is computed and power calculations are carried out.<br><br>
 If <code>geoscale, locations, kappa</code> and <code>mu</code> are specified then a new trial dataframe is constructed
 corresponding to a novel simulated human settlement pattern. This is generated using the
-Thomas algorithm (<code>rThomas</code>) in <a href="http://spatstat.org/" class="external-link"><code>spatstat</code></a>
+Thomas algorithm (<code>rThomas</code>) in <a href="https://cran.r-project.org/web/packages/spatstat.random/citation.html" class="external-link"><code>spatstat.random</code></a>
 allowing the user to defined the density of locations and degree of spatial clustering.
 The resulting trial data frame comprises a set of Cartesian coordinates centred at the origin.</p>
     </div>
@@ -128,8 +131,8 @@ The resulting trial data frame comprises a set of Cartesian coordinates centred 
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x -5.20    -2.57     0.11     0.00     2.65     4.80   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       y -5.20    -2.32     0.11     0.00     2.38     4.80   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x -5.11    -2.57     0.05     0.00     2.60     4.89   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       y -5.12    -2.32    -0.01     0.00     2.39     4.88   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  106 sq.km</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geolocation of centroid (radians):</span>

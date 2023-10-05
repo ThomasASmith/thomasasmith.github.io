@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,9 @@
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -161,7 +164,7 @@ is used to achieve an intra-cluster correlation coefficient (ICC) that approxima
 the value of <code>'ICC_inp'</code> by searching for an appropriate value of the kernel bandwidth.</p></li>
 </ol><p><code>num[i]</code>, the synthetic outcome for location <code>i</code>
 is simulated with expectation: <br>
-$$\code{E(num[i]) = outcome0[i] * propensity[i] * denom[i] * (1 - effect*I[i])/mean(outcome0[] * propensity[])}$$ <br>
+$$E(num[i]) = outcome0[i] * propensity[i] * denom[i] * (1 - effect*I[i])/mean(outcome0[] * propensity[])$$ <br>
 The sampling distribution of <code>num[i]</code> depends on the value of <code>scale</code> as follows: <br></p><table class="table table"><tr><td><code>scale</code>=’continuous’</td><td>Values of <code>num</code> are sampled from a
 Normal distributions with means <code>E(num[i])</code>
 and variance determined by the fitting to <code>ICC_inp</code>.</td><td><code>scale</code>=’count’</td><td>Simulated events are allocated to locations via multivariate hypergeometric distributions

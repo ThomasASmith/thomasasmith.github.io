@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,9 @@
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -173,7 +176,7 @@ options are:</p><table class="table table"><tr><td><code>"Z"</code></td><td></td
     <p><code>CRTanalysis</code> is a wrapper for the statistical analysis packages:
 <a href="https://www.jstatsoft.org/article/view/v015i02" class="external-link">geepack</a>,
 <a href="https://www.r-inla.org/" class="external-link">INLA</a>,
-<a href="https://cran.r-project.org/web/packages/jagsUI/index.html" class="external-link">jagsUI</a>,
+<a href="https://github.com/kenkellner/jagsUI" class="external-link">jagsUI</a>,
 and the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test" class="external-link">t.test</a>
 function of package <code>stats</code>.
 The wrapper does not provide an interface to the full functionality of these packages.
@@ -224,7 +227,7 @@ the numerator must be coded as 0 or 1. Technically the binomial denominator is t
 <span class="r-out co"><span class="r-pr">#&gt;</span> No modelling of contamination </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.373  (95% CL:  0.306 0.445 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.228  (95% CL:  0.167 0.305 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.388  (95% CL:  0.134 0.57 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.388  (95% CL:  0.136 0.575 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Intracluster correlation (ICC)  :  0.0573  (95% CL:  0.00643 0.108 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span>
@@ -236,14 +239,14 @@ the numerator must be coded as 0 or 1. Technically the binomial denominator is t
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated scale parameter: 0.45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:  pvar + (1 | cluster) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error function model for contamination</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.417  (95% CL:  0.33 0.507 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.186  (95% CL:  0.136 0.25 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.554  (95% CL:  0.329 0.703 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimates:       Control:  0.417  (95% CL:  0.331 0.511 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Intervention:  0.187  (95% CL:  0.136 0.25 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Efficacy:  0.551  (95% CL:  0.335 0.702 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contamination range(km):  4.22  (95% CL:  4.2 4.23 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % locations contaminated: 91.6  (95% CL:  90.6 92 %)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total effect            : 0.23  (95% CL:  0.112 0.343 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ipsilateral Spillover   : 0.0233  (95% CL:  0.0125 0.0321 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contralateral Spillover : 0.0417  (95% CL:  0.019 0.0647 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total effect            : 0.229  (95% CL:  0.116 0.345 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ipsilateral Spillover   : 0.0232  (95% CL:  0.0129 0.0324 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contralateral Spillover : 0.0414  (95% CL:  0.0198 0.065 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> deviance:  1374.215 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AIC     :  1382.215 including penalty for the contamination scale parameter</span>
 </code></pre></div>

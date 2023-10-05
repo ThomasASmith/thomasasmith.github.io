@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,9 @@
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -192,7 +195,7 @@ structured outputs</td>
 </tr>
 <tr class="odd">
 <td><code>MCMC</code></td>
-<td><a href="https://cran.r-project.org/web/packages/jagsUI/index.html" class="external-link">jagsUI</a></td>
+<td><a href="https://cran.r-project.org/web/packages/spatstat.random/citation.html" class="external-link">jagsUI</a></td>
 <td>Interval estimates for contamination parameters</td>
 <td>Identifiability issues and slow convergence are possible</td>
 </tr>
@@ -590,11 +593,11 @@ them to a <code>trial</code> data frame and specify them using
 value for the specified field</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">example</span>, distance <span class="op">=</span> <span class="st">"hdep"</span><span class="op">)</span></span>
-<span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, scale_par <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, scale_par <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">ps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"sdep"</span><span class="op">)</span></span>
+<span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, scale_par <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">ps3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"disc"</span><span class="op">)</span></span>
+<span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, scale_par <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"kern"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">ps1</span>, <span class="va">ps2</span>, <span class="va">ps3</span>, <span class="va">ps4</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'hdep'</span>, <span class="st">'sdep'</span>, <span class="st">'disc'</span>, <span class="st">'kern'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>
