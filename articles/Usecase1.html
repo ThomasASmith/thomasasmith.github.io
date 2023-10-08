@@ -138,7 +138,7 @@ algorithm</a> will often lead to connected clusters, in a “fish scale”
 manner. This is the default option.</li>
 <li>
 <code>algorithm = "TSP"</code> implements the
-<code>repetitive_nn</code> option of the <a href="https://cran.r-project.org/web/packages/TSP/vignettes/TSP.pdf" class="external-link"><code>TSP</code>
+<code>repetitive_nn</code> option of the <a href="https://CRAN.R-project.org/package=TSP" class="external-link"><code>TSP</code>
 package</a> for solving the travelling salesman problem. This finds an
 efficient path through the study locations. Clusters are formed by
 grouping the required number of locations sequentially along the path.
@@ -275,7 +275,13 @@ Details of the implementation in <code>CRTspat</code> are in the <a href="../ref
 <span>                     clusterEffects <span class="op">=</span> <span class="cn">FALSE</span>, spatialEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     requireMesh <span class="op">=</span> <span class="cn">TRUE</span>, inla_mesh <span class="op">=</span> <span class="va">examplemesh100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Analysis of baseline only, using INLA</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span>
+<span><span class="co">## which was just loaded, were retired in October 2023.</span></span>
+<span><span class="co">## Please refer to R-spatial evolution reports for details, especially</span></span>
+<span><span class="co">## https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span>
+<span><span class="co">## It may be desirable to make the sf package available;</span></span>
+<span><span class="co">## package maintainers should consider adding sf to Suggests:.</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">baselineanalysis</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'prediction'</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example1c.r-1.png"><br><em>Fig 1.3 Smoothed surface of
@@ -284,7 +290,7 @@ baseline prevalence</em>
 <p>A summary of the baseline prevalence at cluster level is used in this
 example to match clusters on baseline prevalence and then generate a
 randomisation based on matched pairs.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_randomized</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randomizeCRT.html">randomizeCRT</a></span><span class="op">(</span><span class="va">example_clustered</span>, matchedPair <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  baselineNumerator <span class="op">=</span> <span class="st">"RDT_test_result"</span>, baselineDenominator <span class="op">=</span> <span class="st">"base_denom"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">example_randomized</span><span class="op">)</span></span></code></pre></div>
@@ -310,7 +316,7 @@ randomisation based on matched pairs.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Other variables in dataset</span></span>
 <span><span class="co">## --------------------------          RDT_test_result  base_denom  base_num  pair</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">example_randomized</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, maskbuffer<span class="op">=</span><span class="fl">0.2</span>, legend.position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>,<span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>
 <img src="example1d.r-1.png"><br><em>Fig 1.4 Map of arm

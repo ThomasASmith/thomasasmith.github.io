@@ -80,11 +80,11 @@ assignments (factor <code>cluster</code>), and arm assignments (factor <code>arm
 
 
 <dt>offset</dt>
-<dd><p>(see <code>inla.mesh.2d</code> documentation)</p></dd>
+<dd><p>see <code>inla.mesh.2d</code> documentation</p></dd>
 
 
 <dt>max.edge</dt>
-<dd><p>(see <code>inla.mesh.2d</code> documentation)</p></dd>
+<dd><p>see <code>inla.mesh.2d</code> documentation</p></dd>
 
 
 <dt>inla.alpha</dt>
@@ -113,12 +113,12 @@ assignments (factor <code>cluster</code>), and arm assignments (factor <code>arm
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>compute_mesh</code> carries out the computationally intensive steps required for setting-up an
-INLA analysis of an object of class <code>"CRTsp"</code>, creating the preface_validitytion mesh and the projection matrices.
+INLA analysis of an object of class <code>"CRTsp"</code>, creating the prediction mesh and the projection matrices.
 The mesh can be reused for different models fitted to the same
 geography. The computational resources required depend largely on the resolution of the prediction mesh.
 The prediction mesh is thinned to include only pixels centred at a distance less than
 <code>maskbuffer</code> from the nearest point.<br>
-A warning may be generated unless the <code>Matrix</code> library is loaded.</p>
+A warning may be generated if the <code>Matrix</code> library is not loaded.</p>
     </div>
 
     <div class="section level2">
@@ -136,13 +136,6 @@ A warning may be generated unless the <code>Matrix</code> library is loaded.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> It may be desirable to make the sf package available;</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> package maintainers should consider adding sf to Suggests:.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mesh of  183  pixels of size  0.5  km </span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># 50m mesh for analyses of test dataset using \code{distance = "nearestDiscord"}.</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org" class="external-link">Matrix</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">example</span> <span class="op">&lt;-</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">exampleMesh</span><span class="op">=</span><span class="fu">compute_mesh</span><span class="op">(</span><span class="va">example</span>, pixel <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mesh of  18279  pixels of size  0.05  km </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

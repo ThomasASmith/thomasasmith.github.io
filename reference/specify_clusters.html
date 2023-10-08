@@ -87,8 +87,9 @@ households</p></dd>
 
 
 <dt>algorithm</dt>
-<dd><p>algorithm for cluster boundaries, options are:
-<code>NN</code> (the default),  <code>kmeans</code>,  <code>TSP</code></p></dd>
+<dd><p>algorithm for cluster boundaries, with options:</p><table class="table table"><tr><td><code>NN</code></td><td>Nearest neighbour: assigns equal numbers of locations to each cluster</td></tr><tr><td><code>kmeans</code></td><td>kmeans clustering: aims to partition locations so that each
+belongs to the cluster with the nearest centroid.</td></tr><tr><td><code>TSP</code></td><td>travelling salesman problem heuristic: Assigns locations sequentially
+along a travelling salesman path.</td></tr></table></dd>
 
 
 <dt>reuseTSP</dt>
@@ -101,13 +102,12 @@ the TSP algorithm</p></dd>
     
 
 <p>A list of class <code>"CRTsp"</code> containing the following components:</p><table class="table table"><tr><td><code>geom_full</code></td><td>list:</td><td>summary statistics describing the site,
-and cluster assignments.</td><td></td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td><td></td></tr><tr><td></td><td><code>x</code></td><td>numeric vector:</td><td>x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector:</td><td>y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor</td><td>assignments to cluster of each location</td></tr><tr><td></td><td><code>...</code></td><td></td><td>other objects included in the input <code>"CRTsp"</code> object or data frame</td></tr></table></div>
+and cluster assignments.</td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td></tr><tr><td></td><td><code>x</code></td><td>numeric vector: x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector: y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor: assignments to cluster of each location</td></tr><tr><td></td><td><code>...</code></td><td>other objects included in the input <code>"CRTsp"</code> object or data frame</td></tr></table></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Clustering is carried out using one of three algorithms:</p><table class="table table"><tr><td><code>NN</code></td><td>Nearest neighbour:</td><td>assigns equal numbers of locations to each cluster</td></tr><tr><td><code>kmeans</code></td><td>kmeans clustering  :</td><td>aims to partition locations so that each
-belongs to the cluster with the nearest centroid</td></tr><tr><td><code>TSP</code></td><td>travelling salesman problem heuristic :</td><td>Assigns locations sequentially
-along a travelling salesman path.The <code>reuseTSP</code> parameter is used to allow the path to be reused
-for creating alternative allocations with different cluster sizes.</td></tr></table><p>Either <code>k</code> or <code>h</code> must be specified. If both are specified
+    <p>The <code>reuseTSP</code> parameter is used to allow the path to be reused
+for creating alternative allocations with different cluster sizes.<br><br>
+Either <code>k</code> or <code>h</code> must be specified. If both are specified
 the input value of <code>k</code> is ignored.<br></p>
     </div>
 

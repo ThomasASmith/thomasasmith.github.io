@@ -146,7 +146,7 @@ using pair-matching on the baseline data (see details)</p></dd>
     
 
 <p>A list of class <code>"CRTsp"</code> containing the following components:</p><table class="table table"><tr><td><code>geom_full</code></td><td>list:</td><td>summary statistics describing the site
-cluster assignments, and randomization</td><td></td></tr><tr><td><code>design</code></td><td>list:</td><td>values of input parameters to the design</td><td></td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td><td></td></tr><tr><td></td><td><code>x</code></td><td>numeric vector:</td><td>x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector:</td><td>y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor:</td><td>assignments to cluster of each location</td></tr><tr><td></td><td><code>arm</code></td><td>factor:</td><td>assignments to <code>control</code> or <code>intervention</code> for each location</td></tr><tr><td></td><td><code>nearestDiscord</code></td><td>numeric vector:</td><td>Euclidean distance to nearest discordant location (km)</td></tr><tr><td></td><td><code>propensity</code></td><td>numeric vector:</td><td>propensity for each location</td></tr><tr><td></td><td><code>base_denom</code></td><td>numeric vector:</td><td>denominator for baseline</td></tr><tr><td></td><td><code>base_num</code></td><td>numeric vector:</td><td>numerator for baseline</td></tr><tr><td></td><td><code>denom</code></td><td>numeric vector:</td><td>denominator for the outcome</td></tr><tr><td></td><td><code>num</code></td><td>numeric vector:</td><td>numerator for the outcome</td></tr><tr><td></td><td><code>...</code></td><td></td><td>other objects included in the input <code>"CRTsp"</code> object
+cluster assignments, and randomization</td></tr><tr><td><code>design</code></td><td>list:</td><td>values of input parameters to the design</td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td></tr><tr><td></td><td><code>x</code></td><td>numeric vector:  x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector:  y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor:  assignments to cluster of each location</td></tr><tr><td></td><td><code>arm</code></td><td>factor:  assignments to <code>control</code> or <code>intervention</code> for each location</td></tr><tr><td></td><td><code>nearestDiscord</code></td><td>numeric vector:  Euclidean distance to nearest discordant location (km)</td></tr><tr><td></td><td><code>propensity</code></td><td>numeric vector:  propensity for each location</td></tr><tr><td></td><td><code>base_denom</code></td><td>numeric vector:  denominator for baseline</td></tr><tr><td></td><td><code>base_num</code></td><td>numeric vector:  numerator for baseline</td></tr><tr><td></td><td><code>denom</code></td><td>numeric vector:  denominator for the outcome</td></tr><tr><td></td><td><code>num</code></td><td>numeric vector:  numerator for the outcome</td></tr><tr><td></td><td><code>...</code></td><td>other objects included in the input <code>"CRTsp"</code> object
 or <code>data.frame</code></td></tr></table></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -165,10 +165,14 @@ the value of <code>'ICC_inp'</code> by searching for an appropriate value of the
 </ol><p><code>num[i]</code>, the synthetic outcome for location <code>i</code>
 is simulated with expectation: <br>
 $$E(num[i]) = outcome0[i] * propensity[i] * denom[i] * (1 - effect*I[i])/mean(outcome0[] * propensity[])$$ <br>
-The sampling distribution of <code>num[i]</code> depends on the value of <code>scale</code> as follows: <br></p><table class="table table"><tr><td><code>scale</code>=’continuous’</td><td>Values of <code>num</code> are sampled from a
+The sampling distribution of <code>num[i]</code> depends on the value of <code>scale</code> as follows: <br></p><ul><li><p><code>scale</code>=’continuous’: Values of <code>num</code> are sampled from a
 Normal distributions with means <code>E(num[i])</code>
-and variance determined by the fitting to <code>ICC_inp</code>.</td><td><code>scale</code>=’count’</td><td>Simulated events are allocated to locations via multivariate hypergeometric distributions
-parameterised with <code>E(num[i])</code>.</td></tr></table><p><code>denominator</code> may specify a vector of numeric (non-zero) values
+and variance determined by the fitting to <code>ICC_inp</code>.<br></p></li>
+<li><p><code>scale</code>=’count’: Simulated events are allocated to locations via multivariate hypergeometric distributions
+parameterised with <code>E(num[i])</code>.<br></p></li>
+<li><p><code>scale</code>=’proportion’: Simulated events are allocated to locations via multinomial distributions
+parameterised with <code>E(num[i])</code>.<br></p></li>
+</ul><p><code>denominator</code> may specify a vector of numeric (non-zero) values
 in the input <code>"CRTsp"</code> or <code>data.frame</code> which is returned
 as variable <code>denom</code>. It acts as a scale-factor for continuous outcomes, rate-multiplier
 for counts, or denominator for proportions. For discrete data all values of <code>denom</code>
@@ -191,8 +195,8 @@ Contamination is simulated as arising from a diffusion-like process.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span><span class="va">exampleCRT</span> <span class="op">&lt;-</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu">simulateCRT</span><span class="op">(</span><span class="va">exampleCRT</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span><span class="va">smalltrial</span> <span class="op">&lt;-</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'smalltrial.csv'</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu">simulateCRT</span><span class="op">(</span><span class="va">smalltrial</span>,</span></span>
 <span class="r-in"><span>  effect <span class="op">=</span> <span class="fl">0.25</span>,</span></span>
 <span class="r-in"><span>  ICC_inp <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
 <span class="r-in"><span>  outcome0 <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
@@ -200,7 +204,8 @@ Contamination is simulated as arising from a diffusion-like process.</p>
 <span class="r-in"><span>  scale <span class="op">=</span> <span class="st">'proportion'</span>,</span></span>
 <span class="r-in"><span>  sd <span class="op">=</span> <span class="fl">0.6</span>,</span></span>
 <span class="r-in"><span>  tol <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">simulation</span><span class="op">)</span> <span class="op">}</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">simulation</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimating the smoothing required to achieve the target ICC of 0.05 </span>
@@ -210,26 +215,23 @@ Contamination is simulated as arising from a diffusion-like process.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       y -5.08    -2.84     0.19     0.05     2.49     6.16   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  27.6 sq.km</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geolocation of centroid (radians):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           latitude:  -0.43 longitude:  34.2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x -0.70    -0.23    -0.00     0.01     0.30     0.58   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       y -0.77    -0.22    -0.00     0.05     0.24     1.55   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  2.06 sq.km</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      1181            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           24            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             49.2            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             3.9            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> S.D. of distance to nearest discordant location (km):           1.05          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      208            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           18            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             11.6            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             4.9            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> S.D. of distance to nearest discordant location (km):           0.26          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Other variables in dataset</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          RDT_test_result  base_denom  denom  propensity  num  base_num            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          denom  propensity  num  base_denom  base_num            </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

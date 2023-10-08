@@ -131,11 +131,11 @@ package.</li>
 <li>
 <code>method = "LME4"</code> fits linear (for continuous data) or
 generalized linear (for counts and proportions) mixed models with iid
-random effects for clusters in <a href="https://cran.r-project.org/web/packages/lme4/lme4.pdf" class="external-link">lme4</a>.</li>
+random effects for clusters in <a href="https://CRAN.R-project.org/package=lme4" class="external-link">lme4</a>.</li>
 <li>
 <code>method = "MCMC"</code> uses Markov chain Monte Carlo
-simulation in package <a href="https://cran.r-project.org/web/packages/jagsUI/index.html" class="external-link">jagsUI</a>,
-which calls r-JAGS.</li>
+simulation in package <a href="https://CRAN.R-project.org/package=jagsUI" class="external-link">jagsUI</a>, which calls
+r-JAGS.</li>
 <li>
 <code>method = "INLA"</code> uses approximate Bayesian inference via
 the <a href="https://www.r-inla.org/" class="external-link">R-INLA package</a>. This provides
@@ -182,7 +182,7 @@ of cluster means</td>
 </tr>
 <tr class="odd">
 <td><code>LME4</code></td>
-<td><a href="https://cran.r-project.org/web/packages/lme4/lme4.pdf" class="external-link">lme4</a></td>
+<td><a href="https://CRAN.R-project.org/package=lme4" class="external-link">lme4</a></td>
 <td>Analysis of contamination</td>
 <td>No geostatistical analysis</td>
 </tr>
@@ -195,7 +195,7 @@ structured outputs</td>
 </tr>
 <tr class="odd">
 <td><code>MCMC</code></td>
-<td><a href="https://cran.r-project.org/web/packages/spatstat.random/citation.html" class="external-link">jagsUI</a></td>
+<td><a href="https://CRAN.R-project.org/package=jagsUI" class="external-link">jagsUI</a></td>
 <td>Interval estimates for contamination parameters</td>
 <td>Identifiability issues and slow convergence are possible</td>
 </tr>
@@ -552,7 +552,7 @@ available. These are specified by the <code>distance</code> parameter
 </tr>
 <tr class="even">
 <td><code>hdep</code></td>
-<td>Tukey’s half-depth</td>
+<td>Tukey half-depth</td>
 <td>Algorithm of <a href="https://www.jstor.org/stable/2986073" class="external-link">Rousseeuw &amp;
 Ruts(1996)</a>
 </td>
@@ -616,14 +616,14 @@ with the scale parameter estimated in the same way as in the scale
 parameter in other models (see above Table 5.2).</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">examples_hdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Tukey's half-depth</span></span></code></pre>
+<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Tukey half-depth</span></span></code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_hdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
-<span><span class="co">## Measure of distance or surround: Tukey's half-depth </span></span>
+<span><span class="co">## Measure of distance or surround: Tukey half-depth </span></span>
 <span><span class="co">## No non-linear parameter. 1</span></span>
 <span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for contamination</span></span>
