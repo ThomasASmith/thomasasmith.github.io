@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,10 +18,7 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/CRTspat.html">Get started</a>
-</li>
-<li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
@@ -64,7 +61,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_clusters</span><span class="op">(</span></span>
 <span>  trial <span class="op">=</span> <span class="va">trial</span>,</span>
-<span>  k <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  h <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  algorithm <span class="op">=</span> <span class="st">"NN"</span>,</span>
 <span>  reuseTSP <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -78,7 +75,7 @@
 households</p></dd>
 
 
-<dt>k</dt>
+<dt>c</dt>
 <dd><p>integer: number of clusters in each arm</p></dd>
 
 
@@ -107,8 +104,8 @@ and cluster assignments.</td></tr><tr><td><code>trial</code></td><td>data frame:
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>reuseTSP</code> parameter is used to allow the path to be reused
 for creating alternative allocations with different cluster sizes.<br><br>
-Either <code>k</code> or <code>h</code> must be specified. If both are specified
-the input value of <code>k</code> is ignored.<br></p>
+Either <code>c</code> or <code>h</code> must be specified. If both are specified
+the input value of <code>c</code> is ignored.<br></p>
     </div>
 
     <div class="section level2">

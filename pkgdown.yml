@@ -2,7 +2,6 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  CRTspat: CRTspat.html
   Usecase1: Usecase1.html
   Usecase2: Usecase2.html
   Usecase3: Usecase3.html
@@ -12,5 +11,5 @@ articles:
   Usecase7: Usecase7.html
   Usecase8: Usecase8.html
   Usecase9: Usecase9.html
-last_built: 2023-10-08T15:45Z
+last_built: 2023-11-04T14:57Z
 

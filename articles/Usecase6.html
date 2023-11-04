@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,9 +35,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/CRTspat.html">Get started</a>
-</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -84,14 +81,6 @@
 
     
     
-<!--To build the vignette
-# since the vignette takes a long time to run, it is not run with every build
-# as suggested here https://ropensci.org/blog/2019/12/08/precompute-vignettes/
-# to Knit this vignette without this time consuming step being part of the default build
-knitr::knit("vignettes/Usecase6.Rmd.orig", output = "vignettes/Usecase6.Rmd")
-rmarkdown.html_vignette.check_title = FALSE
-devtools::install(build_vignettes = TRUE)
--->
 <p><code>CRTspat</code> is intended to facilitate thematic mapping of
 the geography of a CRT at each stage from enumeration of the trial
 population to data analysis. Graphical outputs are generated with
@@ -129,7 +118,7 @@ randomized. Buffer zones can be plotted on this map.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">exampleCRT</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'arms'</span>, showLocations<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">exampleCRT</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'arms'</span>, showBuffer<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>        showClusterBoundaries <span class="op">=</span> <span class="cn">FALSE</span>, buffer_width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Buffer includes locations within  500 m of the opposing arm</span></span></code></pre>
+<pre><code><span><span class="co">## Buffer includes locations within 500m of the opposing arm</span></span></code></pre>
 <p>
 <img src="example6c.r-1.png"><br><em>Fig 6.3 Arms with locations
 </em>
@@ -173,6 +162,7 @@ distance from the boundary between the arms.</p>
 <span><span class="co">## Total effect            : 0.231  (95% CL:  0.116 0.347 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0234  (95% CL:  0.0129 0.0325 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0417  (95% CL:  0.0195 0.0655 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1374.215 </span></span>
 <span><span class="co">## AIC     :  1382.215 including penalty for the contamination scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
