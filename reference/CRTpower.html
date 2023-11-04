@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,10 +18,7 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/CRTspat.html">Get started</a>
-</li>
-<li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
@@ -71,10 +68,11 @@
 <span>  yC <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  outcome_type <span class="op">=</span> <span class="st">"d"</span>,</span>
 <span>  sigma2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  phi <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  denominator <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  N <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  ICC <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  k <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cv_percent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sd_h <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -82,7 +80,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>trial</dt>
-<dd><p>dataframe or <code>'CRTsp'</code> object containing Cartesian coordinates of locations in columns 'x' and 'y'.</p></dd>
+<dd><p>dataframe or <code>'CRTsp'</code> object: optional list of locations</p></dd>
 
 
 <dt>locations</dt>
@@ -102,11 +100,11 @@
 
 
 <dt>yC</dt>
-<dd><p>numeric: baseline value of outcome</p></dd>
+<dd><p>numeric: baseline (control) value of outcome</p></dd>
 
 
 <dt>outcome_type</dt>
-<dd><p>character with options -
+<dd><p>character: with options -
 <code>'y'</code>: continuous;
 <code>'n'</code>: count;
 <code>'e'</code>: event rate;
@@ -118,8 +116,8 @@
 <dd><p>numeric: variance of the outcome (required for <code>outcome_type = 'y'</code>)</p></dd>
 
 
-<dt>phi</dt>
-<dd><p>numeric: overdispersion parameter (for <code>outcome_type = 'n'</code> or <code>outcome_type = 'e'</code>)</p></dd>
+<dt>denominator</dt>
+<dd><p>numeric: rate multiplier (for <code>outcome_type = 'n'</code> or <code>outcome_type = 'e'</code>)</p></dd>
 
 
 <dt>N</dt>
@@ -127,10 +125,14 @@
 
 
 <dt>ICC</dt>
-<dd><p>numeric: Intra-Cluster Correlation</p></dd>
+<dd><p>numeric: Intra-cluster correlation</p></dd>
 
 
-<dt>k</dt>
+<dt>cv_percent</dt>
+<dd><p>numeric: Coefficient of variation of the outcome (expressed as a percentage)</p></dd>
+
+
+<dt>c</dt>
 <dd><p>integer: number of clusters in each arm (required if <code>trial</code> is not specified)</p></dd>
 
 
@@ -147,32 +149,40 @@ trial description and results of power calculations</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Power and sample size calculations are for a two-arm trial using the formulae of
-<a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-11-102" class="external-link">Hemming et al, 2011</a> which use a
-normal approximation for the inter-cluster variation. For counts
-or event rate data a quasi–Poisson model is assumed. The functions do not consider any loss
-in power due to contamination, loss to follow-up etc.
-If geolocations are not input power and sample size calculations are based on the scalar input parameters.<br><br>
-If a trial dataframe or <code>'CRTsp'</code> object containing a pre-existing randomization is input then the
-numbers and sizes of clusters are in the input data are used to estimate the power. If buffer zones have been specified
-then separate calculations are made for the core area and for the full site<br>
-The output is an object of class <code>'CRTsp'</code> containing any input trial data.frame and values for:</p><ul><li><p>The required numbers of clusters to achieve the specified power.</p></li>
+    <p>Power and sample size calculations are for an unmatched two-arm trial. For counts
+or event rate data the formula of <a href="https://doi.org/10.1093/ije/28.2.319" class="external-link">Hayes &amp; Bennett, 1999</a> is used. This requires as an input the
+between cluster coefficient of variation (<code>cv_percent</code>). For continuous outcomes and proportions the formulae of
+<a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-11-102" class="external-link">Hemming et al, 2011</a> are used. These make use of
+the intra-cluster correlation in the outcome (<code>ICC</code>) as an input. If the coefficient of variation and not the ICC is supplied then
+the intra-cluster correlation is computed from the coefficient of variation using the formulae
+from <a href="https://doi.org/10.1201/9781584888178" class="external-link">Hayes &amp; Moulton</a>. If incompatible values for <code>ICC</code> and <code>cv_percent</code> are supplied
+then the value of the <code>ICC</code> is used.<br><br>
+The calculations do not consider any loss in power due to contamination, loss to follow-up etc..<br><br>
+If geolocations are not input then power and sample size calculations are based on the scalar input parameters.<br><br>
+If a trial dataframe or <code>'CRTsp'</code> object is input then this is used to determine the number of locations. If this input object
+contains cluster assignments then the numbers and sizes of clusters in the input data are used to estimate the power. If buffer zones have been specified
+then separate calculations are made for the core area and for the full site.<br><br>
+The output is an object of class <code>'CRTsp'</code> containing any input trial dataframe and values for:</p><ul><li><p>The required numbers of clusters to achieve the specified power.</p></li>
 <li><p>The design effect based on the input ICC.</p></li>
-<li><p>Calculations of the nominal power (ignoring any bias caused by contamination effects)<br></p></li>
+<li><p>Calculations of the nominal power (ignoring any bias caused by contamination, loss to follow-up etc.)<br></p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span><span class="co"># Example without input geolocations</span></span></span>
-<span class="r-in"><span><span class="va">examplePower1</span> <span class="op">=</span> <span class="fu">CRTpower</span><span class="op">(</span>locations <span class="op">=</span> <span class="fl">3000</span>, ICC<span class="op">=</span><span class="fl">0.10</span>, effect<span class="op">=</span><span class="fl">0.4</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
-<span class="r-in"><span>    outcome_type <span class="op">=</span> <span class="st">'d'</span>, desiredPower <span class="op">=</span> <span class="fl">0.8</span>, yC<span class="op">=</span><span class="fl">0.35</span>, k <span class="op">=</span> <span class="fl">20</span>, sd_h<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span><span class="co"># Power calculations for a binary outcome without input geolocations</span></span></span>
+<span class="r-in"><span><span class="va">examplePower1</span> <span class="op">=</span> <span class="fu">CRTpower</span><span class="op">(</span>locations <span class="op">=</span> <span class="fl">3000</span>, ICC <span class="op">=</span> <span class="fl">0.10</span>, effect <span class="op">=</span> <span class="fl">0.4</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
+<span class="r-in"><span>    outcome_type <span class="op">=</span> <span class="st">'d'</span>, desiredPower <span class="op">=</span> <span class="fl">0.8</span>, yC<span class="op">=</span><span class="fl">0.35</span>, c <span class="op">=</span> <span class="fl">20</span>, sd_h <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examplePower1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Example with input geolocations and randomisation</span></span></span>
-<span class="r-in"><span><span class="va">examplePower2</span> <span class="op">=</span> <span class="fu">CRTpower</span><span class="op">(</span>trial <span class="op">=</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'example_site.csv'</span><span class="op">)</span>, desiredPower <span class="op">=</span> <span class="fl">0.8</span>,</span></span>
-<span class="r-in"><span>    effect<span class="op">=</span><span class="fl">0.4</span>, yC<span class="op">=</span><span class="fl">0.35</span>, outcome_type <span class="op">=</span> <span class="st">'d'</span>, ICC <span class="op">=</span> <span class="fl">0.05</span>, k <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Power calculations for a rate outcome without input geolocations</span></span></span>
+<span class="r-in"><span><span class="va">examplePower2</span> <span class="op">=</span> <span class="fu">CRTpower</span><span class="op">(</span>locations <span class="op">=</span> <span class="fl">2000</span>, cv_percent <span class="op">=</span> <span class="fl">40</span>, effect <span class="op">=</span> <span class="fl">0.4</span>, denominator <span class="op">=</span> <span class="fl">2.5</span>,</span></span>
+<span class="r-in"><span>    alpha <span class="op">=</span> <span class="fl">0.05</span>, outcome_type <span class="op">=</span> <span class="st">'e'</span>, desiredPower <span class="op">=</span> <span class="fl">0.8</span>, yC <span class="op">=</span> <span class="fl">0.35</span>, c <span class="op">=</span> <span class="fl">20</span>, sd_h<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examplePower2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Example with input geolocations and randomisation</span></span></span>
+<span class="r-in"><span><span class="va">examplePower3</span> <span class="op">=</span> <span class="fu">CRTpower</span><span class="op">(</span>trial <span class="op">=</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'example_site.csv'</span><span class="op">)</span>, desiredPower <span class="op">=</span> <span class="fl">0.8</span>,</span></span>
+<span class="r-in"><span>    effect<span class="op">=</span><span class="fl">0.4</span>, yC<span class="op">=</span><span class="fl">0.35</span>, outcome_type <span class="op">=</span> <span class="st">'d'</span>, ICC <span class="op">=</span> <span class="fl">0.05</span>, c <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examplePower3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *** All of geoscale, locations, kappa, mu needed to simulate a new site ***===============================CLUSTER RANDOMISED TRIAL ===========================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ===============================CLUSTER RANDOMISED TRIAL ===========================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      No coordinates in dataset</span>
@@ -180,7 +190,7 @@ The output is an object of class <code>'CRTsp'</code> containing any input trial
 <span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No locations to randomize          -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Specification of Requirements</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------          -</span>
@@ -194,9 +204,35 @@ The output is an object of class <code>'CRTsp'</code> containing any input trial
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------                              -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Design effect:                                   8.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Nominal power (%)                                84.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Clusters required for power of 80%:               38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total clusters required (power of 80%):          38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sufficient clusters for required power?          Yes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *** Assuming all clusters are the same size ***===============================CLUSTER RANDOMISED TRIAL ===========================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ===============================CLUSTER RANDOMISED TRIAL ===========================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      No coordinates in dataset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Not aggregated. Total records: 0. Unique locations:          2000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No locations to randomize          -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Specification of Requirements</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------          -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Significance level (2-sided):              0.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of Outcome                             event rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Expected outcome in control arm:            0.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean rate multiplier:                       2.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Required effect size:                       0.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficient of variation (%):               40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Power calculations (ignoring contamination)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------                              -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Design effect:                                   7.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nominal power (%)                                93.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total clusters required (power of 80%):          28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sufficient clusters for required power?          Yes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> *** Assuming all clusters are the same size ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ===============================CLUSTER RANDOMISED TRIAL ===========================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
@@ -209,10 +245,10 @@ The output is an object of class <code>'CRTsp'</code> containing any input trial
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Not aggregated. Total records: 3172. Unique locations:          1181</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             29.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             79.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No randomization          -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Specification of Requirements</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------          -</span>
@@ -224,10 +260,10 @@ The output is an object of class <code>'CRTsp'</code> containing any input trial
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Power calculations (ignoring contamination)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------                              -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Design effect:                                   2.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nominal power (%)                                93.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Clusters required for power of 80%:               26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sufficient clusters for required power?          Yes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Design effect:                                   4.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nominal power (%)                                98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total clusters required (power of 80%):          20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sufficient clusters for required power?          No</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Other variables in dataset</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          RDT_test_result</span>

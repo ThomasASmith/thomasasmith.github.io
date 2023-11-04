@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,9 +35,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/CRTspat.html">Get started</a>
-</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -84,14 +81,6 @@
 
     
     
-<!--To build the vignette
-# since the vignette takes a long time to run, it is not run with every build
-# as suggested here https://ropensci.org/blog/2019/12/08/precompute-vignettes/
-# to Knit this vignette without this time consuming step being part of the default build
-knitr::knit("vignettes/Usecase5.Rmd.orig", output = "vignettes/Usecase5.Rmd")
-rmarkdown.html_vignette.check_title = FALSE
-devtools::install(build_vignettes = TRUE)
--->
 <p>The <a href="../reference/CRTanalysis.html"><code>CRTanalysis()</code></a>
 function is a wrapper for different statistical analysis packages that
 can be used to analyse either simulated or real trial datasets. It is
@@ -214,10 +203,8 @@ or <code>summary("&lt;analysis&gt;$model_object")</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CRTspat</span><span class="op">)</span></span>
 <span><span class="va">example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readdata.html">readdata</a></span><span class="op">(</span><span class="st">"exampleCRT.txt"</span><span class="op">)</span></span>
-<span><span class="va">analysisT</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"T"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  No fixed effects of distance -</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisT</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">analysisT</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"T"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisT</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  T </span></span>
@@ -227,9 +214,10 @@ or <code>summary("&lt;analysis&gt;$model_object")</code>.</p>
 <span><span class="co">## Estimates:       Control:  0.364  (95% CL:  0.286 0.451 )</span></span>
 <span><span class="co">##             Intervention:  0.21  (95% CL:  0.147 0.292 )</span></span>
 <span><span class="co">##                 Efficacy:  0.423  (95% CL:  0.208 0.727 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">## P-value (2-sided):  0.006879064</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisT</span><span class="op">$</span><span class="va">model_object</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Two Sample t-test</span></span>
@@ -371,11 +359,9 @@ the goodness of fit of the model in <code><a href="https://rdrr.io/r/stats/optim
 shown in Figure 5.1. The light blue shaded part of the plot corresponds
 to the contamination interval in those cases where this is
 estimated.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"Z"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  No fixed effects of distance -</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_Z</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"Z"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_Z</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -383,13 +369,12 @@ estimated.</p>
 <span><span class="co">## Model formula:  (1 | cluster) </span></span>
 <span><span class="co">## No comparison of arms </span></span>
 <span><span class="co">## Estimates:       Control:  0.285  (95% CL:  NA )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1387.609 </span></span>
 <span><span class="co">## AIC     :  1391.609</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"X"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  No fixed effects of distance -</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_X</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"X"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_X</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -399,13 +384,12 @@ estimated.</p>
 <span><span class="co">## Estimates:       Control:  0.366  (95% CL:  0.292 0.449 )</span></span>
 <span><span class="co">##             Intervention:  0.216  (95% CL:  0.162 0.281 )</span></span>
 <span><span class="co">##                 Efficacy:  0.41  (95% CL:  0.165 0.584 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1379.898 </span></span>
 <span><span class="co">## AIC     :  1385.898</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_P</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_P</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_P</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_P</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -422,13 +406,12 @@ estimated.</p>
 <span><span class="co">## Total effect            : 0.23  (95% CL:  0.114 0.344 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0233  (95% CL:  0.0127 0.0323 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0417  (95% CL:  0.0192 0.0651 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1374.215 </span></span>
 <span><span class="co">## AIC     :  1382.215 including penalty for the contamination scale parameter</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_L</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"L"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 0.249 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_L</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_L</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"L"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_L</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -445,13 +428,12 @@ estimated.</p>
 <span><span class="co">## Total effect            : 0.229  (95% CL:  0.115 0.342 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0219  (95% CL:  0.0121 0.0304 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0388  (95% CL:  0.0183 0.0604 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1374.201 </span></span>
 <span><span class="co">## AIC     :  1382.201 including penalty for the contamination scale parameter</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_S</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"S"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 1.674 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_S</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_S</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"S"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_S</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -468,13 +450,12 @@ estimated.</p>
 <span><span class="co">## Total effect            : 0.237  (95% CL:  0.12 0.356 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.029  (95% CL:  0.016 0.0403 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0522  (95% CL:  0.0248 0.0818 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1374.094 </span></span>
 <span><span class="co">## AIC     :  1382.094 including penalty for the contamination scale parameter</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisLME4_R</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No non-linear parameter.  Signed distance -Signed distance to other arm (km)</span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_R</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">analysisLME4_R</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_R</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -491,9 +472,10 @@ estimated.</p>
 <span><span class="co">## Total effect            : 0.468  (95% CL:  0.181 0.694 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.117  (95% CL:  0.0564 0.157 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.238  (95% CL:  0.0831 0.368 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1378.711 </span></span>
 <span><span class="co">## AIC     :  1384.711</span></span></code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysisLME4_Z</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysisLME4_X</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysisLME4_P</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -591,7 +573,7 @@ publications.</p>
 them to a <code>trial</code> data frame and specify them using
 <code>distance</code>. <code><a href="../reference/CRTanalysis.html">CRTanalysis()</a></code> computes the minimum
 value for the specified field</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_distance.html">compute_distance</a></span><span class="op">(</span><span class="va">example</span>, distance <span class="op">=</span> <span class="st">"hdep"</span><span class="op">)</span></span>
 <span><span class="va">ps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"sdep"</span><span class="op">)</span></span>
@@ -614,11 +596,9 @@ a value, then <code>cfunc = "R"</code> is also used. If
 <code>cfunc = "E"</code> is specified then an escape function is fitted
 with the scale parameter estimated in the same way as in the scale
 parameter in other models (see above Table 5.2).</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">examples_hdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Tukey half-depth</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_hdep</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">examples_hdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"hdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_hdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -635,14 +615,13 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Total effect            : 0.172  (95% CL:  0.0524 0.292 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0313  (95% CL:  0.01 0.0512 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0444  (95% CL:  0.0128 0.0785 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1379.89 </span></span>
 <span><span class="co">## AIC     :  1385.89</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_hdep</span>,legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">examples_sdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"sdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***No non-linear parameter.  Surround: -Simplicial depth</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">examples_sdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"sdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -659,14 +638,13 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Total effect            : 0.193  (95% CL:  0.0802 0.306 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0299  (95% CL:  0.013 0.0456 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0431  (95% CL:  0.0169 0.0704 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1376.417 </span></span>
 <span><span class="co">## AIC     :  1382.417</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span>
-<span><span class="va">examples_disc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***Precalculated scale parameter: 0.15 Surround: -disc of radius 0.15 km</span></span></code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">examples_disc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -683,14 +661,13 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Total effect            : 0.186  (95% CL:  0.0912 0.282 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.00458  (95% CL:  0.00239 0.00656 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.00576  (95% CL:  0.00271 0.00905 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1374.274 </span></span>
 <span><span class="co">## AIC     :  1380.274</span></span></code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span>
-<span><span class="va">examples_kern</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## *** Surrounds must have cfunc 'E' or 'R': using cfunc = 'R' ***Precalculated scale parameter: 0.15 Surround: -kern with kernel s.d. 0.15 km</span></span></code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">examples_kern</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
@@ -707,9 +684,10 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Total effect            : 0.22  (95% CL:  0.122 0.32 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.011  (95% CL:  0.00661 0.0152 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0134  (95% CL:  0.00707 0.0203 )</span></span>
+<span><span class="co">## Coefficient of variation        :  41.6 %</span></span>
 <span><span class="co">## deviance:  1369.677 </span></span>
 <span><span class="co">## AIC     :  1375.677</span></span></code></pre>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps7</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">ps4</span>, <span class="va">ps5</span>, <span class="va">ps6</span>, <span class="va">ps7</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'hdep'</span>, <span class="st">'sdep'</span>, <span class="st">'disc'</span>, <span class="st">'kern'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>

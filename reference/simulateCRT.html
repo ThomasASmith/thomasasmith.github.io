@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,10 +18,7 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/CRTspat.html">Get started</a>
-</li>
-<li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
@@ -146,7 +143,7 @@ using pair-matching on the baseline data (see details)</p></dd>
     
 
 <p>A list of class <code>"CRTsp"</code> containing the following components:</p><table class="table table"><tr><td><code>geom_full</code></td><td>list:</td><td>summary statistics describing the site
-cluster assignments, and randomization</td></tr><tr><td><code>design</code></td><td>list:</td><td>values of input parameters to the design</td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td></tr><tr><td></td><td><code>x</code></td><td>numeric vector:  x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector:  y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor:  assignments to cluster of each location</td></tr><tr><td></td><td><code>arm</code></td><td>factor:  assignments to <code>control</code> or <code>intervention</code> for each location</td></tr><tr><td></td><td><code>nearestDiscord</code></td><td>numeric vector:  Euclidean distance to nearest discordant location (km)</td></tr><tr><td></td><td><code>propensity</code></td><td>numeric vector:  propensity for each location</td></tr><tr><td></td><td><code>base_denom</code></td><td>numeric vector:  denominator for baseline</td></tr><tr><td></td><td><code>base_num</code></td><td>numeric vector:  numerator for baseline</td></tr><tr><td></td><td><code>denom</code></td><td>numeric vector:  denominator for the outcome</td></tr><tr><td></td><td><code>num</code></td><td>numeric vector:  numerator for the outcome</td></tr><tr><td></td><td><code>...</code></td><td>other objects included in the input <code>"CRTsp"</code> object
+cluster assignments, and randomization</td></tr><tr><td><code>design</code></td><td>list:</td><td>values of input parameters to the design</td></tr><tr><td><code>trial</code></td><td>data frame:</td><td>rows correspond to geolocated points, as follows:</td></tr><tr><td></td><td><code>x</code></td><td>numeric vector:  x-coordinates of locations</td></tr><tr><td></td><td><code>y</code></td><td>numeric vector:  y-coordinates of locations</td></tr><tr><td></td><td><code>cluster</code></td><td>factor:  assignments to cluster of each location</td></tr><tr><td></td><td><code>arm</code></td><td>factor:  assignments to <code>control</code> or <code>intervention</code> for each location</td></tr><tr><td></td><td><code>nearestDiscord</code></td><td>numeric vector:  signed Euclidean distance to nearest discordant location (km)</td></tr><tr><td></td><td><code>propensity</code></td><td>numeric vector:  propensity for each location</td></tr><tr><td></td><td><code>base_denom</code></td><td>numeric vector:  denominator for baseline</td></tr><tr><td></td><td><code>base_num</code></td><td>numeric vector:  numerator for baseline</td></tr><tr><td></td><td><code>denom</code></td><td>numeric vector:  denominator for the outcome</td></tr><tr><td></td><td><code>num</code></td><td>numeric vector:  numerator for the outcome</td></tr><tr><td></td><td><code>...</code></td><td>other objects included in the input <code>"CRTsp"</code> object
 or <code>data.frame</code></td></tr></table></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -206,10 +203,10 @@ Contamination is simulated as arising from a diffusion-like process.</p>
 <span class="r-in"><span>  tol <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">simulation</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimating the smoothing required to achieve the target ICC of 0.05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> =====================    SIMULATION OF CLUSTER RANDOMISED TRIAL    =================</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating the smoothing required to achieve the target ICC of 0.05</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>                                                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ===============================CLUSTER RANDOMISED TRIAL ===========================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
