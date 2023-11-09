@@ -8,8 +8,8 @@
 <meta name="description" content="CRTspat">
 <title>Use Case 02: Simulation of trials with geographical contamination • CRTspat</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Use Case 02: Simulation of trials with geographical contamination">
 <meta property="og:description" content="CRTspat">
@@ -230,7 +230,7 @@ it is the value of <code>theta_inp</code> that is used.</p>
 <span><span class="co">## Estimates:       Control:  0.454  (95% CL:  0.402 0.506 )</span></span>
 <span><span class="co">##             Intervention:  0.128  (95% CL:  0.0833 0.191 )</span></span>
 <span><span class="co">##                 Efficacy:  0.719  (95% CL:  0.712 0.892 )</span></span>
-<span><span class="co">## Coefficient of variation        :  28.6 %</span></span>
+<span><span class="co">## Coefficient of variation:  28.6 %  (95% CL:  21.9 41.5 )</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">## P-value (2-sided):  2.450413e-07</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -314,7 +314,7 @@ geostatistical model</em>
 <span><span class="co">## Estimates:       Control:  0.451  (95% CL:  0.395 0.508 )</span></span>
 <span><span class="co">##             Intervention:  0.149  (95% CL:  0.123 0.179 )</span></span>
 <span><span class="co">##                 Efficacy:  0.67  (95% CL:  0.586 0.735 )</span></span>
-<span><span class="co">## Coefficient of variation        :  38.6 %</span></span>
+<span><span class="co">## Coefficient of variation:  38.6 %  (95% CL:  31.5 50 )</span></span>
 <span><span class="co">## Intracluster correlation (ICC)  :  0.0389  (95% CL:  0.018 0.0598 )</span></span>
 <span><span class="co">## </span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -359,7 +359,7 @@ overall initial prevalence and ICC<a class="anchor" aria-label="anchor" href="#e
 <span><span class="co">## Estimates:       Control:  0.444  (95% CL:  0.363 0.528 )</span></span>
 <span><span class="co">##             Intervention:  0.156  (95% CL:  0.134 0.18 )</span></span>
 <span><span class="co">##                 Efficacy:  0.649  (95% CL:  0.551 0.722 )</span></span>
-<span><span class="co">## Coefficient of variation        :  52.7 %</span></span>
+<span><span class="co">## Coefficient of variation:  52.7 %  (95% CL:  42.2 70.8 )</span></span>
 <span><span class="co">## Intracluster correlation (ICC)  :  0.0823  (95% CL:  0.0371 0.128 )</span></span>
 <span><span class="co">## </span></span></code></pre>
 </div>
