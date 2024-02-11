@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,12 +42,12 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -83,28 +83,29 @@
     
 <p>In trials of malaria interventions, a ‘fried-egg’ design is often
 used to avoid the downward bias in the estimates of efficacy caused by
-contamination. This entails estimating the outcome only from the cores
-of the clusters. However, the intervention must also be introduced in
-the buffer zone, so the trial may be very expensive if there are high
-per capita intervention costs. Since the buffer zone is excluded from
-data collection, there are usually no data on whether the buffer is
-large enough to avoid contamination effects. A precautionary approach
-with large buffer zones is therefore the norm. However with ‘fried-eggs’
-there are no data on the scale of the contamination, so if the effect
-was swamped by unexpectedly large contamination, this would be
-indistinguishable from failure of the intervention.</p>
+spillover. This entails estimating the outcome only from the cores of
+the clusters. However, the intervention must also be introduced in the
+buffer zone, so the trial may be very expensive if there are high per
+capita intervention costs. Since the buffer zone is excluded from data
+collection, there are usually no data on whether the buffer is large
+enough to avoid spillover effects. A precautionary approach with large
+buffer zones is therefore the norm. However with ‘fried-eggs’ there are
+no data on the scale of the spillover, so if the effect was swamped by
+unexpectedly large spillover, this would be indistinguishable from
+failure of the intervention.</p>
 <p>The alternative design is to sample in the buffer zones, accepting
-some degree of contamination. The data analysis might then be used to
-estimate the scale of contamination (see <a href="Usecase5.html">Use
-Case 5</a>). The statistical model might be to adjust the estimate of
-effect size for the contamination effect, or to decide which
-contaminated areas to exclude <em>post hoc</em> from the definitive
-analysis (based on pre-defined criteria). This is expected to lead to
-some loss of power, compared to collecting the same amount of outcome
-data from the core area alone (though this might be compensated for by
-increasing data collection), but is likely to be less complicated to
-organise, allowing the trial to be carried out over a much smaller area,
-with far fewer locations needing to be randomized (see <a href="Usecase4.html">Use Case 4</a>).</p>
+some degree of spillover. The data analysis might then be used to
+estimate the scale of spillover (see <a href="Usecase5.html">Use Case
+5</a>). The statistical model might be to adjust the estimate of effect
+size for the spillover effect, or to decide which contaminated areas to
+exclude <em>post hoc</em> from the definitive analysis (based on
+pre-defined criteria). This is expected to lead to some loss of power,
+compared to collecting the same amount of outcome data from the core
+area alone (though this might be compensated for by increasing data
+collection), but is likely to be less complicated to organise, allowing
+the trial to be carried out over a much smaller area, with far fewer
+locations needing to be randomized (see <a href="Usecase4.html">Use Case
+4</a>).</p>
 <p>In this example, the effects of reducing the numbers of observations
 on power and bias are evaluated in simulated datasets. To compare
 ‘fried-egg’ strategies with comparable designs that sample the whole
@@ -115,8 +116,7 @@ homogeneous background disease rates are assigned, using
 <code>propensity &lt;- 1</code>, fixed values are used for the outcome
 in the control arm, the target ICC of the simulations and the number of
 clusters in each arm of the trial. Efficacy is also fixed at 0.4. The
-contamination interval is sampled from a uniform(0, 1.5km)
-distribution.</p>
+spillover interval is sampled from a uniform(0, 1.5km) distribution.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CRTspat</span><span class="op">)</span></span>
 <span><span class="co"># use the locations only from example dataset (as with Use Case 7)</span></span>
@@ -223,7 +223,7 @@ is very small)</p>
 <span><span class="va">fig8_1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">theta_inp</span>, y <span class="op">=</span> <span class="va">significant</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">fried</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"loess"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#b2df8a"</span>,<span class="st">"#D55E00"</span>,<span class="st">"#0072A7"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">'Simulated contamination range (km)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">'Simulated spillover interval (km)'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">'Power'</span><span class="op">)</span></span>
 <span><span class="va">fig8_1c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">observations</span>, y <span class="op">=</span> <span class="va">bias</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">fried</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"loess"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -233,7 +233,7 @@ is very small)</p>
 <span><span class="va">fig8_1d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">theta_inp</span>, y <span class="op">=</span> <span class="va">bias</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">fried</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"loess"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#b2df8a"</span>,<span class="st">"#D55E00"</span>,<span class="st">"#0072A7"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">'Simulated contamination range (km)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">'Simulated spillover interval (km)'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">'Bias'</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">fig8_1a</span>, <span class="va">fig8_1b</span>, <span class="va">fig8_1c</span>, <span class="va">fig8_1d</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">14</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
@@ -249,15 +249,14 @@ suggestion that there is a maximum at a sample size of about 900
 locations is presumably an effect of the smoothing of the results). The
 ‘scrambled’ egg trials lose power with each reduction in the number of
 observations (Figure 8.1a), but substantive loss of power occurs only
-with contamination range of 1 km or more in this dataset. The fried egg
+with spillover interval of 1 km or more in this dataset. The fried egg
 designs largely avoid this loss of power (Figure 8.1b) but are less
-powerful on average when the contamination range is less that 0.5
-km.</p>
+powerful on average when the spillover interval is less that 0.5 km.</p>
 <p>In these simulations, the lme4 estimates of the efficacy are biased
 slightly downwards (i.e. the bias has negative sign). The absolute bias
 was least when some of the locations were excluded (Figure 8.1c). There
 is less absolute bias with the fried-egg designs but the effect is small
-except when the simulated contamination range is very large (Figure
+except when the simulated spillover interval is very large (Figure
 8.1d). The difference in bias between ‘fried’ and ‘scrambled’ egg
 designs is modest in relation to the scale of the overall bias.</p>
 <p>

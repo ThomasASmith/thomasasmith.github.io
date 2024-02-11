@@ -12,7 +12,7 @@ into objects of class "CRTsp" or creates a new "CRTsp" object by simulating a se
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,12 +27,12 @@ into objects of class "CRTsp" or creates a new "CRTsp" object by simulating a se
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -128,20 +128,35 @@ The resulting trial data frame comprises a set of Cartesian coordinates centred 
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x -5.05    -2.37     0.07     0.00     2.41     4.95   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       y -4.91    -2.48     0.00     0.00     2.41     5.09   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  106 sq.km</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x -4.85    -2.62    -0.02     0.00     2.52     5.15   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       y -4.88    -2.44    -0.02     0.00     2.37     5.12   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geolocation of centroid (radians):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           latitude:  longitude:  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  106 sq.km</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (convex hull) :  99.7 sq.km</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      10000            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           Not assigned            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No randomization          -            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 3                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      10000                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           Not assigned                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 6                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 7                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 8                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No randomization          -                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 10                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 11                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 12                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 13                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 14                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 15                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 16                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 18                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 19                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 20                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 21                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 22                                    </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -12,7 +12,7 @@ or of the results of statistical analyses of a CRT"><!-- mathjax --><script src=
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,12 +27,12 @@ or of the results of statistical analyses of a CRT"><!-- mathjax --><script src=
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -147,13 +147,13 @@ containing a randomisation to arms, a stacked bar chart of the outcome
 grouped by the specified <code>distance</code> is produced. If the specified <code>distance</code>
 has not yet been calculated an error is returned.<br><br>
 If <code>map = FALSE</code> and the input is a <code>CRTanalysis</code> object a plot of the
-estimated contamination function is generated. The fitted contamination function is plotted
+estimated spillover function is generated. The fitted spillover function is plotted
 as a continuous blue line against the measure
 the surround or of the distance to the nearest discordant location. Using the same axes, data summaries are plotted for
 ten categories of distance from the boundary. Both the
 average of the outcome and confidence intervals are plotted.</p><ul><li><p>For analyses with logit link function the outcome is plotted as a proportion. <br></p></li>
-<li><p>For analyses with log or cloglog link function the outcome is plotted on a scale of the Williams mean
-(mean of exp(log(x + 1))) - 1)<br></p></li>
+<li><p>For analyses with log or cloglog link function the data are plotted on a scale of the Williams mean
+(mean of exp(log(x + 1))) - 1) rescaled so that the median matches the fitted curve at the midpoint.<br></p></li>
 </ul><p>If <code>map = TRUE</code> a thematic map corresponding to the value of <code>fill</code> is generated.</p><ul><li><p><code>fill = 'clusters'</code> or leads to thematic map showing the locations of the clusters</p></li>
 <li><p><code>fill = 'arms'</code> leads to a thematic map showing the geography of the randomization</p></li>
 <li><p><code>fill = 'distance'</code> leads to a raster plot of the distance to the nearest discordant location.</p></li>
@@ -161,10 +161,10 @@ average of the outcome and confidence intervals are plotted.</p><ul><li><p>For a
 </ul><p>If <code>showBuffer = TRUE</code> the map is overlaid with a grey transparent layer showing which
 areas are within a defined distance of the boundary between the arms. Possibilities are:</p><ul><li><p>If the trial has not been randomised or if <code>showBuffer = FALSE</code> no buffer is displayed</p></li>
 <li><p>If <code>buffer_width</code> takes a positive value then buffers of this width are
-displayed irrespective of any pre-specified or contamination limits.</p></li>
-<li><p>If the input is a <code>'CRTanalysis'</code> and contamination limits have been estimated by
+displayed irrespective of any pre-specified or spillover limits.</p></li>
+<li><p>If the input is a <code>'CRTanalysis'</code> and spillover limits have been estimated by
 an <code>'LME4'</code> or <code>'INLA'</code> model then these limits are used to define the displayed buffer.</p></li>
-<li><p>If <code>buffer_width</code> is not specified and no contamination limits are available, then any
+<li><p>If <code>buffer_width</code> is not specified and no spillover limits are available, then any
 pre-specified buffer (e.g. one generated by <code><a href="specify_buffer.html">specify_buffer()</a></code>) is displayed.</p></li>
 </ul><p>A message is output indicating which of these possibilities applies.</p>
     </div>
@@ -186,7 +186,7 @@ pre-specified buffer (e.g. one generated by <code><a href="specify_buffer.html">
 <span class="r-in"><span><span class="co">#show arms</span></span></span>
 <span class="r-in"><span><span class="fu">plotCRT</span><span class="op">(</span><span class="va">example</span>, map <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>fill <span class="op">=</span> <span class="st">'arms'</span>, maskbuffer<span class="op">=</span><span class="fl">0.2</span>, legend.position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>,<span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co">#contamination plot</span></span></span>
+<span class="r-in"><span><span class="co">#spillover plot</span></span></span>
 <span class="r-in"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu">plotCRT</span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,12 +25,12 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -80,7 +80,7 @@
 
 
 <dt>feature</dt>
-<dd><p>feature to be exported, options are:</p><table class="table table"><tr><td><code>'cluster'</code></td><td>cluster assignments</td></tr><tr><td><code>'arms'</code></td><td>arm assignments</td></tr><tr><td><code>'buffer'</code></td><td>buffer zone or contamination zone</td></tr><tr><td><code>'mask'</code></td><td>mask for areas that are distant from habitations</td></tr></table></dd>
+<dd><p>feature to be exported, options are:</p><table class="table table"><tr><td><code>'cluster'</code></td><td>cluster assignments</td></tr><tr><td><code>'arms'</code></td><td>arm assignments</td></tr><tr><td><code>'buffer'</code></td><td>buffer zone or spillover zone</td></tr><tr><td><code>'mask'</code></td><td>mask for areas that are distant from habitations</td></tr></table></dd>
 
 
 <dt>buffer_width</dt>
@@ -125,7 +125,7 @@ these polygons that are at a distance &gt; <code>maskbuffer</code> from the near
 <span class="r-in"><span>        <span class="fu">CRTwrite</span><span class="op">(</span><span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span>, dsn <span class="op">=</span> <span class="va">dsn</span>, feature <span class="op">=</span> <span class="st">'arms'</span>,</span></span>
 <span class="r-in"><span>        driver <span class="op">=</span> <span class="st">'ESRI Shapefile'</span>, maskbuffer <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Writing layer `arms' to data source </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   `C:\Users\smith\AppData\Local\Temp\RtmpAFpUuw/arms' using driver `ESRI Shapefile'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `C:\Users\smith\AppData\Local\Temp\RtmpMFpVzL/arms' using driver `ESRI Shapefile'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Writing 2 features with 1 fields and geometry type Multi Polygon.</span>
 <span class="r-in"><span>    <span class="co"># }</span></span></span>
 </code></pre></div>

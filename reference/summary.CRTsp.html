@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,12 +25,12 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -93,27 +93,42 @@ together with any other variables required for subsequent analysis.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of coordinates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       y -5.08    -2.84     0.19     0.05     2.49     6.16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Min.   : 1st Qu.: Median : Mean   : 3rd Qu.: Max.   :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x        -3.20    -1.40    -0.30    -0.07     1.26     5.16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       y        -5.08    -2.84     0.19     0.05     2.49     6.16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> nearestDiscord -3.47    -0.49     0.04     0.14     0.74     3.30   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total area (within  0.2 km of a location) :  27.6 sq.km</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total area (convex hull) :  48.2 sq.km</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geolocation of centroid (radians):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           latitude:  -0.43 longitude:  34.2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Locations and Clusters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      1181            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           24            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             49.2            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             3.9            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> S.D. of distance to nearest discordant location (km):           1.05          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------                                          -                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate system                      (x, y)                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 3                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Locations:                                                      1181                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Available clusters (across both arms)                           24                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster mean number of points                             49.2                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Per cluster s.d. number of points                             3.9                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster randomization:                      Independently randomized                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 10                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 11                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 12                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 13                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 14                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 15                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 16                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No power calculations to report          -                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 18                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 19                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 20                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 21                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row 22                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Other variables in dataset</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          RDT_test_result  base_denom  propensity  denom  num            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------          RDT_test_result  base_denom  propensity  denom  num                        </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

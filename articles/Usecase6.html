@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,12 +42,12 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a>
-    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a>
     <a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a>
     <a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a>
-    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing contamination)</a>
+    <a class="dropdown-item" href="../articles/Usecase5.html">Use Case 05: Analysis of trials (including methods for analysing spillover)</a>
     <a class="dropdown-item" href="../articles/Usecase6.html">Use Case 06: Thematic mapping of the geography of a CRT</a>
-    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for contamination</a>
+    <a class="dropdown-item" href="../articles/Usecase7.html">Use Case 07: Power and sample size calculations allowing for spillover</a>
     <a class="dropdown-item" href="../articles/Usecase8.html">Use Case 08: Eggs - to fry or scramble?</a>
     <a class="dropdown-item" href="../articles/Usecase9.html">Use Case 09: Preparation of datasets for `CRTspat`</a>
   </div>
@@ -91,10 +91,10 @@ GIS formats.</p>
 trial (see below), with the functionality available expanding as more
 fields are populated in the <code>CRTsp</code> object. When applied to
 output from <code><a href="../reference/CRTanalysis.html">CRTanalysis()</a></code> <code><a href="../reference/plotCRT.html">plotCRT()</a></code> that
-analyse the contamination range, an expanded set of thematic maps are
-available, including overlay plots showing the contamination zone
-(i.e. the subset of the study area estimated to have effects of
-contamination) and thematic maps of spatial predictions.</p>
+analyse the spillover interval, an expanded set of thematic maps are
+available, including overlay plots showing the spillover zone (i.e. the
+subset of the study area estimated to have effects of spillover) and
+thematic maps of spatial predictions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using the same dataset as for Use Case 1.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CRTspat</span><span class="op">)</span></span>
@@ -137,10 +137,10 @@ to the boundary between the arms.</p>
 by distance from boundary</em>
 </p>
 <p>The results of the data analysis can be illustrated with further
-graphics. The blue shaded section of Figure 6.8 indicates the
-contamination zone, corresponding to those locations that fall within
-the central 95% of the estimated sigmoid of the of the effect size by
-distance from the boundary between the arms.</p>
+graphics. The blue shaded section of Figure 6.8 indicates the spillover
+zone, corresponding to those locations that fall within the central 95%
+of the estimated sigmoid of the of the effect size by distance from the
+boundary between the arms.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">exampleCRT</span>, cfunc <span class="op">=</span> <span class="st">"P"</span>, method <span class="op">=</span> <span class="st">"LME4"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
@@ -153,38 +153,39 @@ distance from the boundary between the arms.</p>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
 <span><span class="co">## Estimated scale parameter: 0.45</span></span>
 <span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
-<span><span class="co">## Error function model for contamination</span></span>
+<span><span class="co">## Error function model for spillover</span></span>
 <span><span class="co">## Estimates:       Control:  0.418  (95% CL:  0.331 0.511 )</span></span>
 <span><span class="co">##             Intervention:  0.186  (95% CL:  0.135 0.251 )</span></span>
 <span><span class="co">##                 Efficacy:  0.554  (95% CL:  0.33 0.703 )</span></span>
-<span><span class="co">## Contamination range(km):  4.22  (95% CL:  4.2 4.24 )</span></span>
+<span><span class="co">## Spillover interval(km):      4.22  (95% CL:  4.2 4.24 )</span></span>
 <span><span class="co">## % locations contaminated: 91.6  (95% CL:  90.6 92.2 %)</span></span>
 <span><span class="co">## Total effect            : 0.231  (95% CL:  0.116 0.347 )</span></span>
 <span><span class="co">## Ipsilateral Spillover   : 0.0234  (95% CL:  0.0129 0.0325 )</span></span>
 <span><span class="co">## Contralateral Spillover : 0.0417  (95% CL:  0.0195 0.0655 )</span></span>
 <span><span class="co">## Coefficient of variation:  41.6 %  (95% CL:  31.2 63.1 )</span></span>
-<span><span class="co">## deviance:  1374.215 </span></span>
-<span><span class="co">## AIC     :  1382.215 including penalty for the contamination scale parameter</span></span></code></pre>
+<span><span class="co">## deviance:  1374 </span></span>
+<span><span class="co">## AIC     :  1382 including penalty for the spillover scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'arms'</span>, showBuffer<span class="op">=</span><span class="cn">TRUE</span>, showClusterBoundaries <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Buffer corresponds to estimated contamination zone</span></span></code></pre>
+<pre><code><span><span class="co">## Buffer corresponds to estimated spillover zone</span></span></code></pre>
 <p>
 <img src="example6e.r-1.png"><br><em>Fig 6.6 Plot of estimated
-contamination function </em>
+spillover function </em>
 </p>
 <p>
-<img src="example6e.r-2.png"><br><em>Fig 6.7 Arms with contamination
-zone shaded </em>
+<img src="example6e.r-2.png"><br><em>Fig 6.7 Arms with spillover zone
+shaded </em>
 </p>
 <div class="section level2">
 <h2 id="conclusions">Conclusions<a class="anchor" aria-label="anchor" href="#conclusions"></a>
 </h2>
 <p>In this example, a large proportion of the data points are close to
 the boundary between the arms. The analysis (based on simulated
-contamination) suggests that there are effects of contamination far
-beyond a 500m buffer. However this does not necessarily mean that the
-contamination leads to a large bias or loss in power (see <a href="Usecase7.html">Use Case 7</a>).</p>
+spillover) suggests that there are effects of spillover far beyond a
+500m buffer. However this does not necessarily mean that the spillover
+leads to a large bias or loss in power (see <a href="Usecase7.html">Use
+Case 7</a>).</p>
 </div>
   </main>
 </div>
