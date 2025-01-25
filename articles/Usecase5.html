@@ -8,8 +8,8 @@
 <title>Use Case 05: Analysis of trials (including methods for analysing spillover) • CRTspat</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Use Case 05: Analysis of trials (including methods for analysing spillover)">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,9 +183,9 @@ structured outputs</td>
 </table>
 <p>For the analysis of proportions, the outcome in the control arm is
 estimated as:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>p</mi><mo accent="true">̂</mo></mover><mi>C</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\hat{p}_{C} = \frac{1}{1 + exp(-\beta_1)}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>p</mi><mo accent="true">̂</mo></mover><mi>C</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\hat{p}_{C} = \frac{1}{1 + exp(-\beta_1)}</annotation></semantics></math>,
 in the intervention arm as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>p</mi><mo accent="true">̂</mo></mover><mi>I</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><msub><mi>β</mi><mn>1</mn></msub><mo>−</mo><msub><mi>β</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\hat{p}_{I} = \frac{1}{1 + exp(-\beta_1-\beta_2)}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>p</mi><mo accent="true">̂</mo></mover><mi>I</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><msub><mi>β</mi><mn>1</mn></msub><mo>−</mo><msub><mi>β</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\hat{p}_{I} = \frac{1}{1 + exp(-\beta_1-\beta_2)}</annotation></semantics></math>,
 and the efficacy is estimated as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>E</mi><mo accent="true">̃</mo></mover><mi>s</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><msub><mover><mi>p</mi><mo accent="true">̃</mo></mover><mi>I</mi></msub><msub><mover><mi>p</mi><mo accent="true">̃</mo></mover><mi>C</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">\tilde{E}_{s} = 1- \frac{\tilde{p}_{I}}{\tilde{p}_{C}}</annotation></semantics></math>
 where
@@ -309,7 +309,7 @@ functional forms for this relationship is specified by the value of
 <tr class="odd">
 <td><code>L</code></td>
 <td>inverse logistic (sigmoid)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mspace width="0.222em"></mspace><mfrac><mn>1</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mspace width="0.222em"></mspace><mo>+</mo><mspace width="0.222em"></mspace><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mi>d</mi><mi>/</mi><mi>S</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P\left( d \right) = \ \frac{1}{\left( 1\  + \ exp\left( - d/S \right) \right)}</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mspace width="0.222em"></mspace><mfrac><mn>1</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mspace width="0.222em"></mspace><mo>+</mo><mspace width="0.222em"></mspace><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mi>d</mi><mi>/</mi><mi>S</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P\left( d \right) = \ \frac{1}{\left( 1\  + \ exp\left( - d/S \right) \right)}</annotation></semantics></math></td>
 <td>
 <code>LME4</code> <code>INLA</code> <code>MCMC</code>
 </td>
@@ -478,8 +478,8 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">p0</span>, <span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, <span class="va">p5</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Z'</span>, <span class="st">'X'</span>, <span class="st">'P'</span>, <span class="st">'L'</span>, <span class="st">'S'</span>, <span class="st">'R'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>
-<img src="example5b.r-1.png"><br><em>Fig 5.1 Fitted curves for the
-example dataset with different options for <code>cfunc</code></em>
+<img src="example5b.r-1.png" alt=""><br><em>Fig 5.1 Fitted curves for
+the example dataset with different options for <code>cfunc</code></em>
 </p>
 <p>The piecewise linear spillover function, <code>cfunc = "S"</code>, is
 only linear on the scale of the linear predictor. When used in a
@@ -576,8 +576,8 @@ value for the specified field</p>
 <span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples</span>, distance <span class="op">=</span> <span class="st">"kern"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">ps1</span>, <span class="va">ps2</span>, <span class="va">ps3</span>, <span class="va">ps4</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'hdep'</span>, <span class="st">'sdep'</span>, <span class="st">'disc'</span>, <span class="st">'kern'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>
-<img src="example5c.r-1.png"><br><em>Fig 5.2 Stacked bar plots for
-different surrounds</em>
+<img src="example5c.r-1.png" alt=""><br><em>Fig 5.2 Stacked bar plots
+for different surrounds</em>
 </p>
 <p>If <code>distance</code> is assigned a value of either
 <code>hdep</code>, <code>sdep</code>, then <code>cfunc = "R"</code> is
@@ -684,8 +684,8 @@ parameter in other models (see above Table 5.2).</p>
 <code class="sourceCode R"><span><span class="va">ps7</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">ps4</span>, <span class="va">ps5</span>, <span class="va">ps6</span>, <span class="va">ps7</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'hdep'</span>, <span class="st">'sdep'</span>, <span class="st">'disc'</span>, <span class="st">'kern'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>
-<img src="example5d.r-1.png"><br><em>Fig 5.3 Fitted curves for the
-example dataset with different surrounds </em>
+<img src="example5d.r-1.png" alt=""><br><em>Fig 5.3 Fitted curves for
+the example dataset with different surrounds </em>
 </p>
 </div>
 </div>
@@ -710,7 +710,7 @@ computationally expensive). To create a 100m INLA mesh for
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

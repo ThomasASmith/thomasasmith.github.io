@@ -8,8 +8,8 @@
 <title>Use Case 07: Power and sample size calculations allowing for spillover • CRTspat</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Use Case 07: Power and sample size calculations allowing for spillover">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -173,11 +173,9 @@ results to the expected number can be calculated.</p>
 <p>Despite the spillover, the t-test performs similarly to expectations
 across the range of efficacies investigated (Figure 7.1)</p>
 <p>
-<img src="example7d.r-1.png"><br><em>Fig 7.1 Performance of t-test by
-efficacy <span class="math inline">$\color{purple}{\textbf{----}}$</span> : ratio of
-power:nominal power; <span class="math inline">$\color{green}{\textbf{----}}$</span> :type II error
-rate; <span class="math inline">$\color{blue}{\textbf{----}}$</span> :
-bias. </em>
+<img src="example7d.r-1.png" alt=""><br><em>Fig 7.1 Performance of
+t-test by efficacy purple line: ratio of power:nominal power; green
+line: type II error rate; blue line : bias. </em>
 </p>
 </div>
 <div class="section level2">
@@ -208,10 +206,10 @@ interval.</p>
 <p>The relationships between the simulated spillover interval and the
 corresponding proportion of the locations in the trial (Figure 7.2).</p>
 <p>
-<img src="example7e.r-1.png"><br><em>Fig 7.2 Proportion of locations
-in simulated spillover interval <span class="math inline">$\color{green}{\textbf{----}}$</span> :zone defined
-by <code>gamma_inp</code>; <span class="math inline">$\color{blue}{\textbf{----}}$</span> : zone defined
-by <code>sd</code>. </em>
+<img src="example7e.r-1.png" alt=""><br><em>Fig 7.2 Proportion of
+locations in simulated spillover interval green line: zone defined by
+<code>gamma_inp</code>; blue line : zone defined by <code>sd</code>.
+</em>
 </p>
 <p>The spillover results in a loss of power, and increased negative bias
 in efficacy estimate, but these effects are rather small (Figure
@@ -222,11 +220,9 @@ a t-test) can also be explored (see <a href="Usecase5.html">Use Case
 5</a> and <a href="https://malariajournal.biomedcentral.com/articles/10.1186/s12936-021-03924-7" class="external-link">Multerer
 <em>et al.</em> (2021b)</a>.</p>
 <p>
-<img src="example7e.r-2.png"><br><em>Fig 7.3 Performance of t-test by
-spillover interval <span class="math inline">$\color{purple}{\textbf{----}}$</span> : ratio of
-power:nominal power; <span class="math inline">$\color{green}{\textbf{----}}$</span> :type II error
-rate; <span class="math inline">$\color{blue}{\textbf{----}}$</span> :
-bias. </em>
+<img src="example7e.r-2.png" alt=""><br><em>Fig 7.3 Performance of
+t-test by spillover interval purple line: ratio of power:nominal power;
+green line: type II error rate; blue line: bias. </em>
 </p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -240,7 +236,7 @@ bias. </em>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
