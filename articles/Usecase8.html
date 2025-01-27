@@ -142,7 +142,6 @@ removed</li>
 <span>  <span class="va">trial</span> <span class="op">&lt;-</span> <span class="va">CRT</span><span class="op">$</span><span class="va">trial</span></span>
 <span>  <span class="va">radius</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[[</span><span class="st">"radius"</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">proportion</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[[</span><span class="st">"proportion"</span><span class="op">]</span><span class="op">]</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">radius</span>,<span class="va">proportion</span><span class="op">)</span></span>
 <span>  <span class="va">nlocations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">radius</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">radius</span> <span class="op">&lt;-</span> <span class="va">radius</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span></span>
@@ -197,33 +196,9 @@ is very small)</p>
 <span>  <span class="va">sub_results</span> <span class="op">&lt;-</span> <span class="fu">randomize_simulate</span><span class="op">(</span><span class="va">spillover</span><span class="op">)</span></span>
 <span>  <span class="va">sub_results</span><span class="op">$</span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="va">simulation</span></span>
 <span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">results</span>,<span class="va">sub_results</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## 0 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.1 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.2 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.3 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.4 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.5 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.1</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.2</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.3</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.4</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.5</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.1 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.2 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.3 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.4 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0.5 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.1</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.2</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.3</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.4</span></span></code></pre>
-<pre><code><span><span class="co">## 0 0.5</span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">fried</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">radius</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">'fried'</span>,</span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">results</span><span class="op">$</span><span class="va">fried</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">radius</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">'fried'</span>,</span>
 <span>                      <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">proportion</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">'scrambled'</span>, <span class="st">'neither'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results</span><span class="op">$</span><span class="va">bias</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">effect_size</span> <span class="op">-</span> <span class="fl">0.5</span></span>
 <span></span>
@@ -274,8 +249,8 @@ except when the simulated spillover interval is very large (Figure
 8.1d). The difference in bias between ‘fried’ and ‘scrambled’ egg
 designs is modest in relation to the scale of the overall bias.</p>
 <p>
-<img src="example8c.r-1%20.png" alt=""><br><em>Fig 8.1 Power and bias
-by number of locations in analysis <span class="math inline">$\color{purple}{\textbf{----}}$</span> : Randomly
+<img src="example8c.r-1.png" alt=""><br><em>Fig 8.1 Power and bias by
+number of locations in analysis <span class="math inline">$\color{purple}{\textbf{----}}$</span> : Randomly
 sampled locations removed; <span class="math inline">$\color{green}{\textbf{----}}$</span> : Fried-egg-
 locations in boundary zone removed. </em>
 </p>
