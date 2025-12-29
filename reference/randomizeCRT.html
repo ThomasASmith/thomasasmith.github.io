@@ -21,6 +21,7 @@ augments the trial data frame with assignments to arms "></head><body>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a></li>
+    <li><a class="dropdown-item" href="../articles/Usecase10.html">Use Case 10: Power sample size and bias calculations using a diffusion model for spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a></li>
@@ -96,8 +97,7 @@ matched-pair randomization)</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Randomize the clusters in an example trial</span></span></span>
 <span class="r-in"><span><span class="va">exampleCRT</span> <span class="op">&lt;-</span> <span class="fu">randomizeCRT</span><span class="op">(</span>trial <span class="op">=</span> <span class="fu"><a href="readdata.html">readdata</a></span><span class="op">(</span><span class="st">'exampleCRT.txt'</span><span class="op">)</span>, matchedPair <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> *** No baseline data for matching. Unmatched randomisation ***</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> *** computed distance to nearest measurements in discordant arm ***</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  No baseline data for matching. Unmatched randomisation </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -109,7 +109,7 @@ matched-pair randomization)</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

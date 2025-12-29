@@ -1,8 +1,9 @@
-pandoc: '3.2'
-pkgdown: 2.1.1
+pandoc: 3.6.3
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   Usecase1: Usecase1.html
+  Usecase10: Usecase10.html
   Usecase2: Usecase2.html
   Usecase3: Usecase3.html
   Usecase4: Usecase4.html
@@ -11,4 +12,4 @@ articles:
   Usecase7: Usecase7.html
   Usecase8: Usecase8.html
   Usecase9: Usecase9.html
-last_built: 2025-01-27T18:51Z
+last_built: 2025-12-29T16:10Z

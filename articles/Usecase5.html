@@ -34,6 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a></li>
+    <li><a class="dropdown-item" href="../articles/Usecase10.html">Use Case 10: Power sample size and bias calculations using a diffusion model for spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a></li>
@@ -207,10 +208,10 @@ or <code>summary("&lt;analysis&gt;$model_object")</code>.</p>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm + (1 | cluster) </span></span>
 <span><span class="co">## No modelling of spillover </span></span>
-<span><span class="co">## Estimates:       Control:  0.364  (95% CL:  0.286 0.451 )</span></span>
-<span><span class="co">##             Intervention:  0.21  (95% CL:  0.147 0.292 )</span></span>
-<span><span class="co">##                 Efficacy:  0.423  (95% CL:  0.208 0.727 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
+<span><span class="co">## Estimates:       Control: 0.364 (95% CL: 0.286 0.451)</span></span>
+<span><span class="co">##             Intervention: 0.21 (95% CL: 0.147 0.292)</span></span>
+<span><span class="co">##                 Efficacy: 0.423 (95% CL: 0.208 0.727)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">## P-value (2-sided):  0.006879064</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -360,10 +361,10 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  (1 | cluster) </span></span>
 <span><span class="co">## No comparison of arms </span></span>
-<span><span class="co">## Estimates:       Control:  0.285  (95% CL:  NA )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1387.609 </span></span>
-<span><span class="co">## AIC     :  1391.609</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.285 (95% CL: 0.231 0.346)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1391.609</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"X"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_X</span><span class="op">)</span></span></code></pre></div>
@@ -373,12 +374,12 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Model formula:  arm + (1 | cluster) </span></span>
 <span><span class="co">## No modelling of spillover </span></span>
-<span><span class="co">## Estimates:       Control:  0.366  (95% CL:  0.291 0.448 )</span></span>
-<span><span class="co">##             Intervention:  0.216  (95% CL:  0.162 0.282 )</span></span>
-<span><span class="co">##                 Efficacy:  0.41  (95% CL:  0.164 0.583 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1379.898 </span></span>
-<span><span class="co">## AIC     :  1385.898</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.367 (95% CL: 0.291 0.448)</span></span>
+<span><span class="co">##             Intervention: 0.216 (95% CL: 0.16 0.281)</span></span>
+<span><span class="co">##                 Efficacy: 0.412 (95% CL: 0.171 0.587)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1385.898</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_P</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_P</span><span class="op">)</span></span></code></pre></div>
@@ -387,20 +388,20 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 0.45</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with estimation of scale parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Error function model for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.33 0.508 )</span></span>
-<span><span class="co">##             Intervention:  0.186  (95% CL:  0.136 0.251 )</span></span>
-<span><span class="co">##                 Efficacy:  0.552  (95% CL:  0.323 0.702 )</span></span>
-<span><span class="co">## Spillover interval(km):      4.22  (95% CL:  4.2 4.23 )</span></span>
-<span><span class="co">## % locations contaminated: 91.6  (95% CL:  90.6 92 %)</span></span>
-<span><span class="co">## Total effect            : 0.229  (95% CL:  0.113 0.344 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0233  (95% CL:  0.0127 0.0322 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0415  (95% CL:  0.0191 0.0646 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1374.215 </span></span>
-<span><span class="co">## AIC     :  1382.215 including penalty for the spillover scale parameter</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.418 (95% CL: 0.331 0.512)</span></span>
+<span><span class="co">##             Intervention: 0.186 (95% CL: 0.135 0.249)</span></span>
+<span><span class="co">##                 Efficacy: 0.554 (95% CL: 0.331 0.705)</span></span>
+<span><span class="co">##          Scale parameter: 0.45 (95% CL: 0.45 0.45)</span></span>
+<span><span class="co">##   Spillover interval(km): 1.749 (95% CL: 1.728 1.762)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.685 (95% CL: 0.685 0.685)</span></span>
+<span><span class="co">##    Ipsilateral Spillover: 0.009 (95% CL: 0 0.094)</span></span>
+<span><span class="co">##  Contralateral Spillover: 0.032 (95% CL: 0 0.13)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1382.215 including penalty for the spillover scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_L</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"L"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_L</span><span class="op">)</span></span></code></pre></div>
@@ -409,20 +410,20 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 0.249</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with estimation of scale parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Sigmoid (logistic) function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.416  (95% CL:  0.33 0.507 )</span></span>
-<span><span class="co">##             Intervention:  0.186  (95% CL:  0.135 0.249 )</span></span>
-<span><span class="co">##                 Efficacy:  0.551  (95% CL:  0.328 0.701 )</span></span>
-<span><span class="co">## Spillover interval(km):      4.26  (95% CL:  4.24 4.28 )</span></span>
-<span><span class="co">## % locations contaminated: 92.7  (95% CL:  92.2 93 %)</span></span>
-<span><span class="co">## Total effect            : 0.229  (95% CL:  0.114 0.342 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0219  (95% CL:  0.012 0.0303 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0387  (95% CL:  0.018 0.0606 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1374.201 </span></span>
-<span><span class="co">## AIC     :  1382.201 including penalty for the spillover scale parameter</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.415 (95% CL: 0.331 0.507)</span></span>
+<span><span class="co">##             Intervention: 0.186 (95% CL: 0.135 0.251)</span></span>
+<span><span class="co">##                 Efficacy: 0.551 (95% CL: 0.329 0.701)</span></span>
+<span><span class="co">##          Scale parameter: 0.249 (95% CL: 0.249 0.249)</span></span>
+<span><span class="co">##   Spillover interval(km): 1.81 (95% CL: 1.776 1.823)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.706 (95% CL: 0.706 0.706)</span></span>
+<span><span class="co">##    Ipsilateral Spillover: 0.009 (95% CL: 0 0.098)</span></span>
+<span><span class="co">##  Contralateral Spillover: 0.03 (95% CL: 0 0.127)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1382.201 including penalty for the spillover scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_S</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"S"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_S</span><span class="op">)</span></span></code></pre></div>
@@ -431,20 +432,20 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 1.674</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with estimation of scale parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Piecewise linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.423  (95% CL:  0.334 0.518 )</span></span>
-<span><span class="co">##             Intervention:  0.185  (95% CL:  0.135 0.247 )</span></span>
-<span><span class="co">##                 Efficacy:  0.561  (95% CL:  0.344 0.71 )</span></span>
-<span><span class="co">## Spillover interval(km):      4.1  (95% CL:  4.1 4.11 )</span></span>
-<span><span class="co">## % locations contaminated: 86.6  (95% CL:  86.6 87.1 %)</span></span>
-<span><span class="co">## Total effect            : 0.237  (95% CL:  0.122 0.354 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0289  (95% CL:  0.0162 0.0403 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0521  (95% CL:  0.0253 0.0813 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1374.094 </span></span>
-<span><span class="co">## AIC     :  1382.094 including penalty for the spillover scale parameter</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.423 (95% CL: 0.335 0.516)</span></span>
+<span><span class="co">##             Intervention: 0.185 (95% CL: 0.134 0.247)</span></span>
+<span><span class="co">##                 Efficacy: 0.563 (95% CL: 0.34 0.71)</span></span>
+<span><span class="co">##          Scale parameter: 1.674 (95% CL: 1.674 1.674)</span></span>
+<span><span class="co">##   Spillover interval(km): 1.586 (95% CL: 1.586 1.593)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.633 (95% CL: 0.633 0.633)</span></span>
+<span><span class="co">##    Ipsilateral Spillover: 0.012 (95% CL: 0 0.11)</span></span>
+<span><span class="co">##  Contralateral Spillover: 0.051 (95% CL: 0 0.139)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1382.094 including penalty for the spillover scale parameter</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysisLME4_R</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">example</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, cfunc <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysisLME4_R</span><span class="op">)</span></span></code></pre></div>
@@ -453,20 +454,18 @@ to the spillover interval in those cases where this is estimated.</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## No non-linear parameter. 1</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with no non-linear parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.584  (95% CL:  0.383 0.759 )</span></span>
-<span><span class="co">##             Intervention:  0.116  (95% CL:  0.059 0.216 )</span></span>
-<span><span class="co">##                 Efficacy:  0.8  (95% CL:  0.466 0.919 )</span></span>
-<span><span class="co">## Spillover interval(km):      6.64  (95% CL:  6.61 6.65 )</span></span>
-<span><span class="co">## % locations contaminated: 99.8  (95% CL:  99.8 99.8 %)</span></span>
-<span><span class="co">## Total effect            : 0.465  (95% CL:  0.181 0.691 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.117  (95% CL:  0.0559 0.157 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.236  (95% CL:  0.0831 0.367 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1378.711 </span></span>
-<span><span class="co">## AIC     :  1384.711</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.585 (95% CL: 0.386 0.76)</span></span>
+<span><span class="co">##             Intervention: 0.116 (95% CL: 0.06 0.211)</span></span>
+<span><span class="co">##                 Efficacy: 0.8 (95% CL: 0.478 0.918)</span></span>
+<span><span class="co">##          Scale parameter: 1 (95% CL: 1 1)</span></span>
+<span><span class="co">##   Spillover interval(km): 6.372 (95% CL: 6.243 6.433)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.997 (95% CL: 0.997 0.997)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1384.711</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysisLME4_Z</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysisLME4_X</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -596,20 +595,18 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Tukey half-depth </span></span>
-<span><span class="co">## No non-linear parameter. 1</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with no non-linear parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.382  (95% CL:  0.293 0.477 )</span></span>
-<span><span class="co">##             Intervention:  0.208  (95% CL:  0.151 0.281 )</span></span>
-<span><span class="co">##                 Efficacy:  0.451  (95% CL:  0.168 0.642 )</span></span>
-<span><span class="co">## Spillover interval(km):      0.978  (95% CL:  0.976 0.98 )</span></span>
-<span><span class="co">## % locations contaminated: 55  (95% CL:  55 55 %)</span></span>
-<span><span class="co">## Total effect            : 0.172  (95% CL:  0.0526 0.292 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0313  (95% CL:  0.0101 0.0511 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0443  (95% CL:  0.0128 0.0781 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1379.89 </span></span>
-<span><span class="co">## AIC     :  1385.89</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.382 (95% CL: 0.293 0.478)</span></span>
+<span><span class="co">##             Intervention: 0.208 (95% CL: 0.151 0.282)</span></span>
+<span><span class="co">##                 Efficacy: 0.454 (95% CL: 0.168 0.644)</span></span>
+<span><span class="co">##          Scale parameter: 1 (95% CL: 1 1)</span></span>
+<span><span class="co">##   Spillover interval(km): 0.939 (95% CL: 0.928 0.947)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.529 (95% CL: 0.529 0.529)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1385.89</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_hdep</span>,legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">examples_sdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"sdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span>
@@ -619,20 +616,18 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Simplicial depth </span></span>
-<span><span class="co">## No non-linear parameter. 1</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with no non-linear parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.394  (95% CL:  0.307 0.488 )</span></span>
-<span><span class="co">##             Intervention:  0.198  (95% CL:  0.144 0.265 )</span></span>
-<span><span class="co">##                 Efficacy:  0.496  (95% CL:  0.248 0.663 )</span></span>
-<span><span class="co">## Spillover interval(km):      0.978  (95% CL:  0.976 0.98 )</span></span>
-<span><span class="co">## % locations contaminated: 52.4  (95% CL:  52.2 52.4 %)</span></span>
-<span><span class="co">## Total effect            : 0.195  (95% CL:  0.0808 0.308 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0301  (95% CL:  0.0131 0.046 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0436  (95% CL:  0.0171 0.0713 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1376.417 </span></span>
-<span><span class="co">## AIC     :  1382.417</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.394 (95% CL: 0.309 0.488)</span></span>
+<span><span class="co">##             Intervention: 0.199 (95% CL: 0.144 0.267)</span></span>
+<span><span class="co">##                 Efficacy: 0.495 (95% CL: 0.25 0.661)</span></span>
+<span><span class="co">##          Scale parameter: 1 (95% CL: 1 1)</span></span>
+<span><span class="co">##   Spillover interval(km): 0.937 (95% CL: 0.927 0.945)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.485 (95% CL: 0.485 0.485)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1382.417</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span>
 <span><span class="va">examples_disc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"disc"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
@@ -642,20 +637,18 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: disc of radius 0.15 km</span></span>
-<span><span class="co">## Precalculated scale parameter: 0.15</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with precalculated scale parameter of 0.15:  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.386  (95% CL:  0.312 0.47 )</span></span>
-<span><span class="co">##             Intervention:  0.2  (95% CL:  0.149 0.262 )</span></span>
-<span><span class="co">##                 Efficacy:  0.481  (95% CL:  0.27 0.635 )</span></span>
-<span><span class="co">## Spillover interval(km):      0.978  (95% CL:  0.976 0.98 )</span></span>
-<span><span class="co">## % locations contaminated: 8.89  (95% CL:  8.89 8.89 %)</span></span>
-<span><span class="co">## Total effect            : 0.185  (95% CL:  0.0903 0.283 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.00456  (95% CL:  0.00237 0.00662 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.00574  (95% CL:  0.00266 0.00905 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1374.274 </span></span>
-<span><span class="co">## AIC     :  1380.274</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.387 (95% CL: 0.312 0.47)</span></span>
+<span><span class="co">##             Intervention: 0.2 (95% CL: 0.15 0.262)</span></span>
+<span><span class="co">##                 Efficacy: 0.482 (95% CL: 0.276 0.632)</span></span>
+<span><span class="co">##          Scale parameter: 0.15 (95% CL: 0.15 0.15)</span></span>
+<span><span class="co">##   Spillover interval(km): 0.938 (95% CL: 0.928 0.945)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.089 (95% CL: 0.089 0.089)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1380.274</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span>
 <span><span class="va">examples_kern</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
@@ -665,20 +658,18 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: kern with kernel s.d. 0.15 km</span></span>
-<span><span class="co">## Precalculated scale parameter: 0.15</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with precalculated scale parameter of 0.15:  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Rescaled linear function for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.406  (95% CL:  0.328 0.49 )</span></span>
-<span><span class="co">##             Intervention:  0.184  (95% CL:  0.136 0.246 )</span></span>
-<span><span class="co">##                 Efficacy:  0.545  (95% CL:  0.341 0.684 )</span></span>
-<span><span class="co">## Spillover interval(km):      0.979  (95% CL:  0.977 0.98 )</span></span>
-<span><span class="co">## % locations contaminated: 50.8  (95% CL:  50.6 50.9 %)</span></span>
-<span><span class="co">## Total effect            : 0.22  (95% CL:  0.12 0.321 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.011  (95% CL:  0.0065 0.0152 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0135  (95% CL:  0.0069 0.0204 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1369.677 </span></span>
-<span><span class="co">## AIC     :  1375.677</span></span></code></pre>
+<span><span class="co">## Estimates:       Control: 0.406 (95% CL: 0.328 0.491)</span></span>
+<span><span class="co">##             Intervention: 0.185 (95% CL: 0.137 0.247)</span></span>
+<span><span class="co">##                 Efficacy: 0.544 (95% CL: 0.342 0.684)</span></span>
+<span><span class="co">##          Scale parameter: 0.15 (95% CL: 0.15 0.15)</span></span>
+<span><span class="co">##   Spillover interval(km): 0.935 (95% CL: 0.925 0.944)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.59 (95% CL: 0.59 0.59)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1375.677</span></span></code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ps7</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">ps4</span>, <span class="va">ps5</span>, <span class="va">ps6</span>, <span class="va">ps7</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'hdep'</span>, <span class="st">'sdep'</span>, <span class="st">'disc'</span>, <span class="st">'kern'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
@@ -709,7 +700,7 @@ computationally expensive). To create a 100m INLA mesh for
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

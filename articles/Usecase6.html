@@ -34,6 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/Usecase1.html">Use Case 01: Algorithmic specification of clusters</a></li>
+    <li><a class="dropdown-item" href="../articles/Usecase10.html">Use Case 10: Power sample size and bias calculations using a diffusion model for spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase2.html">Use Case 02: Simulation of trials with geographical spillover</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase3.html">Use Case 03: Estimation of intracluster correlations (ICC) by cluster size</a></li>
     <li><a class="dropdown-item" href="../articles/Usecase4.html">Use Case 04: Estimation of optimal cluster size for a trial with pre-determined buffer width</a></li>
@@ -123,6 +124,7 @@ generate a bar plot to illustrate how much of the data are found close
 to the boundary between the arms.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">exampleCRT</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: `label` cannot be a &lt;ggplot2::element_blank&gt; object.</span></span></code></pre>
 <p>
 <img src="example6d.r-1.png" alt=""><br><em>Fig 6.5 Numbers of
 observations by distance from boundary</em>
@@ -132,31 +134,50 @@ graphics. The blue shaded section of Figure 6.8 indicates the spillover
 zone, corresponding to those locations that fall within the central 95%
 of the estimated sigmoid of the of the effect size by distance from the
 boundary between the arms.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">analysis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">exampleCRT</span>, cfunc <span class="op">=</span> <span class="st">"P"</span>, method <span class="op">=</span> <span class="st">"LME4"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Estimated scale parameter: 0.45 Signed distance -Signed distance to other arm (km)</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<pre><code>## 
+AIC: 1382.59556154402 Spillover scale parameter: 0.21981696975569</code></pre>
+<pre><code>## 
+AIC: 1385.16678301441 Spillover scale parameter: 1.89442074481204</code></pre>
+<pre><code>## 
+AIC: 1384.56974564433 Spillover scale parameter: 0.0580687950830108</code></pre>
+<pre><code>## 
+AIC: 1382.41972768805 Spillover scale parameter: 0.296672334826958</code></pre>
+<pre><code>## 
+AIC: 1382.21769016816 Spillover scale parameter: 0.435328418519021</code></pre>
+<pre><code>## 
+AIC: 1382.82566400225 Spillover scale parameter: 0.76341943326029</code></pre>
+<pre><code>## 
+AIC: 1382.27915707782 Spillover scale parameter: 0.53950586833145</code></pre>
+<pre><code>## 
+AIC: 1382.21467421951 Spillover scale parameter: 0.450083930258126</code></pre>
+<pre><code>## 
+AIC: 1382.21584616456 Spillover scale parameter: 0.4653395817005</code></pre>
+<pre><code>## 
+AIC: 1382.21467421951 Spillover scale parameter: 0.450083930258126</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">analysis</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## =====================CLUSTER RANDOMISED TRIAL ANALYSIS =================</span></span>
 <span><span class="co">## Analysis method:  LME4 </span></span>
 <span><span class="co">## Link function:  logit </span></span>
 <span><span class="co">## Measure of distance or surround: Signed distance to other arm (km)</span></span>
-<span><span class="co">## Estimated scale parameter: 0.45</span></span>
-<span><span class="co">## Model formula:  pvar + (1 | cluster) </span></span>
+<span><span class="co">##  with estimation of scale parameter.  </span></span>
+<span><span class="co">## Model formula:  effect + (1 | cluster) </span></span>
 <span><span class="co">## Error function model for spillover</span></span>
-<span><span class="co">## Estimates:       Control:  0.417  (95% CL:  0.329 0.512 )</span></span>
-<span><span class="co">##             Intervention:  0.186  (95% CL:  0.137 0.251 )</span></span>
-<span><span class="co">##                 Efficacy:  0.554  (95% CL:  0.323 0.703 )</span></span>
-<span><span class="co">## Spillover interval(km):      4.22  (95% CL:  4.2 4.23 )</span></span>
-<span><span class="co">## % locations contaminated: 91.6  (95% CL:  90.6 92 %)</span></span>
-<span><span class="co">## Total effect            : 0.231  (95% CL:  0.112 0.347 )</span></span>
-<span><span class="co">## Ipsilateral Spillover   : 0.0234  (95% CL:  0.0125 0.0325 )</span></span>
-<span><span class="co">## Contralateral Spillover : 0.0417  (95% CL:  0.0189 0.0653 )</span></span>
-<span><span class="co">## Coefficient of variation:  48.4 %  (95% CL:  36 75.9 )</span></span>
-<span><span class="co">## deviance:  1374.215 </span></span>
-<span><span class="co">## AIC     :  1382.215 including penalty for the spillover scale parameter</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<span><span class="co">## Estimates:       Control: 0.417 (95% CL: 0.33 0.509)</span></span>
+<span><span class="co">##             Intervention: 0.186 (95% CL: 0.136 0.249)</span></span>
+<span><span class="co">##                 Efficacy: 0.553 (95% CL: 0.331 0.702)</span></span>
+<span><span class="co">##          Scale parameter: 0.45 (95% CL: 0.45 0.45)</span></span>
+<span><span class="co">##   Spillover interval(km): 1.749 (95% CL: 1.728 1.762)</span></span>
+<span><span class="co">## Pr in spillover interval: 0.686 (95% CL: 0.686 0.686)</span></span>
+<span><span class="co">##    Ipsilateral Spillover: 0.009 (95% CL: 0 0.096)</span></span>
+<span><span class="co">##  Contralateral Spillover: 0.034 (95% CL: 0 0.122)</span></span>
+<span><span class="co">## Coefficient of variation: 48.425 (95% CL: 35.969 75.865)</span></span>
+<span><span class="co">## deviance                :  NA </span></span>
+<span><span class="co">## AIC                     :  1382.215 including penalty for the spillover scale parameter</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">analysis</span>, map <span class="op">=</span> <span class="cn">TRUE</span>, fill <span class="op">=</span> <span class="st">'arms'</span>, showBuffer<span class="op">=</span><span class="cn">TRUE</span>, showClusterBoundaries <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Buffer corresponds to estimated spillover zone</span></span></code></pre>
@@ -188,7 +209,7 @@ Case 7</a>).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
