@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,6 @@
 <span>  personalProtection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  clusterEffects <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  spatialEffects <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  asymmetry <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pixel <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  requireMesh <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -87,7 +86,7 @@ assignments (factor <code>cluster</code>), and arm assignments (factor <code>arm
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>statistical method with options:</p><table class="table table"><tr><td><code>"EMP"</code></td><td>simple averages of the data</td></tr><tr><td><code>"T"</code></td><td>comparison of cluster means by t-test</td></tr><tr><td><code>"GEE"</code></td><td>Generalised Estimating Equations</td></tr><tr><td><code>"LME4"</code></td><td>Generalized Linear Mixed-Effects Models</td></tr><tr><td><code>"INLA"</code></td><td>Integrated Nested Laplace Approximation (INLA)</td></tr><tr><td><code>"MCMC"</code></td><td>Markov chain Monte Carlo using <code>"stan"</code></td></tr><tr><td><code>"WCA"</code></td><td>Within cluster analysis</td></tr></table></dd>
+<dd><p>statistical method with options:</p><table class="table table"><tr><td><code>"EMP"</code></td><td>simple averages of the data</td></tr><tr><td><code>"T"</code></td><td>comparison of cluster means by t-test</td></tr><tr><td><code>"GEE"</code></td><td>Generalised Estimating Equations</td></tr><tr><td><code>"LME4"</code></td><td>Generalized Linear Mixed-Effects Models</td></tr><tr><td><code>"INLA"</code></td><td>Integrated Nested Laplace Approximation (INLA)</td></tr><tr><td><code>"MCMC"</code></td><td>Markov chain Monte Carlo using <code>"stan"</code></td></tr></table></dd>
 
 
 <dt id="arg-distance">distance<a class="anchor" aria-label="anchor" href="#arg-distance"></a></dt>
@@ -145,11 +144,6 @@ assignments (factor <code>cluster</code>), and arm assignments (factor <code>arm
 <dt id="arg-spatialeffects">spatialEffects<a class="anchor" aria-label="anchor" href="#arg-spatialeffects"></a></dt>
 <dd><p>logical: indicator of whether the model includes spatial random effects
 (available only for <code>method = "INLA"</code> or for <code>method = "MCMC"</code>)</p></dd>
-
-
-<dt id="arg-asymmetry">asymmetry<a class="anchor" aria-label="anchor" href="#arg-asymmetry"></a></dt>
-<dd><p>logical: indicator of whether the model includes an asymmetry term (available
-only for <code>method = "MCMC"</code>)</p></dd>
 
 
 <dt id="arg-pixel">pixel<a class="anchor" aria-label="anchor" href="#arg-pixel"></a></dt>

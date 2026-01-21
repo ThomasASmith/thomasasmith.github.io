@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">CRTspat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,8 +94,12 @@ analyses.</p>
 <div class="section level2">
 <h2 id="statistical-methods">Statistical Methods<a class="anchor" aria-label="anchor" href="#statistical-methods"></a>
 </h2>
-<p>The options that can be specified using the <code>method</code>
-parameter in the function call are:</p>
+<p>The <a href="../reference/CRTanalysis.html"><code>CRTanalysis()</code></a>
+function analyses trials with outcomes that may be either proportions,
+rates, or continuous variables. The type of outcome and and the
+corresponding link function are specified with the parameter
+<code>link</code>. The options that can be specified using the
+<code>method</code> parameter in the function call are:</p>
 <ul>
 <li>
 <code>method = "T"</code> summarises the outcome at the level of the
@@ -114,14 +118,13 @@ generalized linear (for counts and proportions) mixed models with iid
 random effects for clusters in <a href="https://CRAN.R-project.org/package=lme4" class="external-link">lme4</a>.</li>
 <li>
 <code>method = "MCMC"</code> uses Markov chain Monte Carlo
-simulation in package <a href="https://CRAN.R-project.org/package=jagsUI" class="external-link">jagsUI</a>, which calls
-r-JAGS.</li>
+simulation in package <a href="https://CRAN.R-project.org/package=rstan" class="external-link">rstan</a>.</li>
 <li>
 <code>method = "INLA"</code> uses approximate Bayesian inference via
 the <a href="https://www.r-inla.org/" class="external-link">R-INLA package</a>. This provides
 functionality for geostatistical analysis, which can be used for
 geographical mapping of model outputs (as illustrated in . INLA spatial
-analysis requires a prediction mesh. This can be generated using <a href="../reference/new_mesh().html"><code>CRTspat::new_mesh()</code></a>.
+analysis requires a prediction mesh. This can be generated using <a href="../reference/compute_mesh.html"><code>CRTspat::compute_mesh()</code></a>.
 This can be computationally expensive, so it is recommended to compute
 the mesh just once for each dataset.</li>
 </ul>
@@ -175,7 +178,7 @@ structured outputs</td>
 </tr>
 <tr class="odd">
 <td><code>MCMC</code></td>
-<td><a href="https://CRAN.R-project.org/package=jagsUI" class="external-link">jagsUI</a></td>
+<td><a href="https://CRAN.R-project.org/package=rstan" class="external-link">rstan</a></td>
 <td>Interval estimates for spillover parameters</td>
 <td>Identifiability issues and slow convergence are possible</td>
 </tr>
@@ -231,18 +234,19 @@ or <code>summary("&lt;analysis&gt;$model_object")</code>.</p>
 <div class="section level2">
 <h2 id="assessing-model-fit">Assessing model fit<a class="anchor" aria-label="anchor" href="#assessing-model-fit"></a>
 </h2>
-<p>The <code>model = "LME4"</code> option outputs the deviance of the
+<p>The <code>method = "LME4"</code> option outputs the deviance of the
 model and the Akaike information criterion (AIC), which can be used to
 select the best fitting model. The deviance information criterion (DIC)
-and Bayesian information criterion (BIC) perform the same role for the
-Bayesian methods (<code>"INLA"</code>, and <code>"MCMC"</code>). The
-comparison of results with <code>cfunc = "X"</code> and
-<code>cfunc = "Z"</code> is used to assess whether the intervention
-effect is likely to be due to chance. With <code>method = "T"</code>,
-<code>cfunc = "X"</code> provides a significance test of the
-intervention effect directly. The models with spillover (see below) can
-be compared by that with <code>cfunc = "X"</code> to evaluate whether
-spillover has led to an important bias.</p>
+and Bayesian information criterion (BIC) perform the same role for
+<code>method = "INLA"</code>. For <code>method = "MCMC"</code>
+goodness-of-fit is assessed using the LOO criterion (package <a href="https://CRAN.R-project.org/package=loo" class="external-link">loo</a>). The comparison
+of results with <code>cfunc = "X"</code> and <code>cfunc = "Z"</code> is
+used to assess whether the intervention effect is likely to be due to
+chance. With <code>method = "T"</code>, <code>cfunc = "X"</code>
+provides a significance test of the intervention effect directly. The
+models with spillover (see below) can be compared by that with
+<code>cfunc = "X"</code> to evaluate whether spillover has led to an
+important bias.</p>
 </div>
 <div class="section level2">
 <h2 id="spillover">Spillover<a class="anchor" aria-label="anchor" href="#spillover"></a>
@@ -342,14 +346,31 @@ functional forms for this relationship is specified by the value of
 <code>LME4</code> <code>INLA</code> <code>MCMC</code>
 </td>
 </tr>
+<tr class="odd">
+<td><code>D</code></td>
+<td>diffusion</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mspace width="0.222em"></mspace><mo>+</mo><mspace width="0.222em"></mspace><mi>e</mi><mi>r</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>d</mi><mrow><mi>S</mi><msqrt><mn>2</mn></msqrt></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P\left( d \right) = 1\ +\ erf\left(\frac{d}{S\sqrt2}\right)</annotation></semantics></math></td>
+<td><code>MCMC</code></td>
+</tr>
 </tbody>
 </table>
-<p><code>cfunc</code> options <code>P</code>, <code>L</code> and
-<code>S</code> lead to non-linear models in which the spillover scale
-parameter (<code>S</code>) must be estimated. This is done by selecting
-<code>scale_par</code> using a one-dimensional optimisation of the
-goodness of fit of the model in <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">stats::optimize()</a></code>.</p>
-<p>The different values for <code>cfunc</code> lead to the fitted curves
+<p>With <code>cfunc</code> options other than <code>D</code> the
+spillover function is applied on the scale of the linear predictor. With
+option <code>D</code> the spillover function is on the same scale as the
+outcome (which matches the linear predictor only if
+<code>link = "identity"</code>). Option <code>D</code> corresponds to
+the <a href="https://doi.org/10.21203/rs.3.rs-5423058/v1" class="external-link">diffusion
+model of spillover</a>.</p>
+<p><code>cfunc</code> options <code>P</code>, <code>L</code>,
+<code>S</code> and <code>D</code> lead to non-linear models in which the
+spillover scale parameter (<code>S</code>) must be estimated. With the
+<code>LME4</code> and <code>INLA</code> options this is done by
+optimising the <code>scale_par</code> by running the generalised linear
+model iteratively within a one-dimensional optimisation of the goodness
+of fit of the model in <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">stats::optimize()</a></code>. With the
+<code>MCMC</code> option the MCMC algorithm fits the scale parameter as
+part of the overall non-linear model fit.</p>
+<p>Different values for <code>cfunc</code> lead to the fitted curves
 shown in Figure 5.1. The light blue shaded part of the plot corresponds
 to the spillover interval in those cases where this is estimated.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -608,7 +629,7 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## deviance                :  NA </span></span>
 <span><span class="co">## AIC                     :  1385.89</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_hdep</span>,legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">ps4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_hdep</span><span class="op">)</span></span>
 <span><span class="va">examples_sdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"sdep"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_sdep</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -650,7 +671,7 @@ parameter in other models (see above Table 5.2).</p>
 <span><span class="co">## deviance                :  NA </span></span>
 <span><span class="co">## AIC                     :  1380.274</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ps6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_disc</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">ps6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotCRT.html">plotCRT</a></span><span class="op">(</span><span class="va">examples_disc</span>,legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">examples_kern</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CRTanalysis.html">CRTanalysis</a></span><span class="op">(</span><span class="va">examples</span>, method <span class="op">=</span> <span class="st">"LME4"</span>, distance <span class="op">=</span> <span class="st">"kern"</span>, cfunc <span class="op">=</span> <span class="st">'R'</span>, scale_par <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">examples_kern</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -687,7 +708,7 @@ the example dataset with different surrounds </em>
 very low resolution mesh is created (creating a high resolution mesh is
 computationally expensive). To create a 100m INLA mesh for
 <code>&lt;MyTrial&gt;</code>, use:</p>
-<p><code>mesh &lt;- new_mesh(trial = &lt;MyTrial&gt; , pixel = 0.1)</code></p>
+<p><code>mesh &lt;- compute_mesh(trial = &lt;MyTrial&gt; , pixel = 0.1)</code></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
